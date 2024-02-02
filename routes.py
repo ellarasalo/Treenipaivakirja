@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 from app import db
 from sqlalchemy.sql import text
 
@@ -15,10 +15,24 @@ def statistics():
 def lisaa():
     return render_template("lisaa_treeni.html") 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html") 
+    if request.method == "GET":
+        return render_template("login.html") 
+    if request.method == "POST":
+        session['username'] = 'hattivatti'
+        return redirect("/")
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html") 
+    if request.method == "GET":
+        return render_template("register.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password1 = request.form["password1"]
+        password2 = request.form["password2"]
+        if password1 != password2:
+            print('salasanat eroavat')
+        return redirect("/")
+
+
