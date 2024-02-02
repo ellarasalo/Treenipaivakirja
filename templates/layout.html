@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="static/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treenipäiväkirja</title>
+</head>
+
+<body>
+    <div id="header">
+        <a href="/" class="title">Treenipäiväkirja</a>
+        <div class="button-container">
+            <a href="statistics" class="circle-button">+</a>
+            <a href="lisää" class="circle-button">+</a>
+        </div>
+    </div>
+    
+    {% block content %}{% endblock %}
+</body>
+
+</html>
