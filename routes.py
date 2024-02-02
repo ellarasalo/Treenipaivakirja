@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, redirect, session
 from app import db
 from sqlalchemy.sql import text
+import queries
 
 @app.route("/")
 def index():
@@ -20,7 +21,12 @@ def login():
     if request.method == "GET":
         return render_template("login.html") 
     if request.method == "POST":
-        session['username'] = 'hattivatti'
+        username = request.form["username"]
+        password = request.form["password"]
+        if queries.login(password, username):
+            session['username'] = username
+        else:
+            print('väärä salasana')
         return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -33,6 +39,8 @@ def register():
         password2 = request.form["password2"]
         if password1 != password2:
             print('salasanat eroavat')
+        queries.register(password2, username)
+        #koodia joka tallentaa käyttäjän tietokantan
         return redirect("/")
 
 
