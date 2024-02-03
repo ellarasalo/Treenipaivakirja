@@ -26,7 +26,7 @@ def login():
         if queries.login(password, username):
             session['username'] = username
         else:
-            print('väärä salasana')
+            return render_template("login.html") # lisää virheviesti väärä käyttäjänimi/käyttäjää ei ole tai salasana
         return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -38,9 +38,8 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            print('salasanat eroavat')
+            return render_template("register.html") # lisää virheviesti salasanat eroavat
         queries.register(password2, username)
-        #koodia joka tallentaa käyttäjän tietokantan
         return redirect("/")
 
 
