@@ -2,11 +2,14 @@
 html, body {
   margin: 0;
   height: 100%;
-  font-family: Arial, sans-serif;
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: linear-gradient(to bottom,
-   #70044b 0%,
+   #2a001b 0%,
    
-  #c9bdf5 100%);
+   #4d3b88 100%); /*#4d3b88 #4a378b*/
 }
 
 #header {
@@ -26,20 +29,20 @@ html, body {
 }
 
 .box {
-  width: 50%; /* Almost the entire width of the container */
-  background-color: #c9bdf5; /* Green color for visibility */
+  width: 50%; 
+  background-color: #312248;
   padding: 20px;
   margin: 10px 0;
   text-align: center;
-  color: rgb(46, 46, 46);
-  border-radius: 9px;
+  color: #e0ddea;
+  border-radius: 8px;
 }
 
 .title {
-  font-size: 3em;
+  font-size: 27px;
   margin-bottom: 10px;
   text-decoration: none;
-  color: #c9bdf5;
+  color: #e0ddea;
 }
 
 .button-container {
