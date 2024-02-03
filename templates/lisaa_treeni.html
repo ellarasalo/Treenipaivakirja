@@ -1,4 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-tänne uusi treeni
+<form action="/lisaa" method="post">
+    Lisää uusi treeni
+    Vapaavalintainen kenttä: <input type="text" name="kentta">
+    <p>
+    -
+    <p>
+    <input type="submit" value="Lisää treeni päiväkirjaan">
+    </form>
+
+
 {% endblock %}

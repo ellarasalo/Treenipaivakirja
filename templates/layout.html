@@ -11,12 +11,16 @@
 <body>
     <div id="header">
         {% if session.username %}
-        <div class="login-info">Olet kirjautunut sisään nimellä {{ session['username']}}</div>
+        <div 
+            class="login-info">Olet kirjautunut sisään nimellä {{ session['username']}}
+            <a href="logout" class="button">Kirjaudu ulos</a>
+        </div>
+
         {% endif %}
         <a href="/" class="title">Treenipäiväkirja</a>
         <div class="button-container">
             <a href="statistics" class="circle-button">+</a>
-            <a href="lisää" class="circle-button">+</a>
+            <a href="lisaa" class="circle-button">+</a>
         </div>
         
     </div>

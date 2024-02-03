@@ -12,9 +12,14 @@ def index():
 def statistics():
     return render_template("statistics.html") 
 
-@app.route("/lisää")
+@app.route("/lisaa", methods=["GET", "POST"])
 def lisaa():
-    return render_template("lisaa_treeni.html") 
+    if request.method == "GET":
+        return render_template("lisaa_treeni.html") 
+    if request.method == "POST":
+        vapaa_kentta = request.form["kentta"]
+        return redirect("/")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -41,5 +46,10 @@ def register():
             return render_template("register.html") # lisää virheviesti salasanat eroavat
         queries.register(password2, username)
         return redirect("/")
-
-
+    
+@app.route("/logout")
+def logout():
+    if request.method == "GET":
+        del session["username"]
+        return redirect("/")
+ 
