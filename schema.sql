@@ -4,3 +4,8 @@ CREATE TABLE users (
     password TEXT
 );
 
+CREATE TABLE workouts (
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    field TEXT
+);

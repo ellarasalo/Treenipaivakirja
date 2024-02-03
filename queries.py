@@ -21,4 +21,8 @@ def login(password, username):
         else:
             return False
 
+def uusi_treeni(username, kentta):
+    sql = text("INSERT INTO workouts (username, field) VALUES (:username, :field)")
+    db.session.execute(sql, {"username":username, "field":kentta})
+    db.session.commit()
 
