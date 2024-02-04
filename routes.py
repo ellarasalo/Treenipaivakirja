@@ -19,6 +19,7 @@ def lisaa():
     if request.method == "POST":
         vapaa_kentta = request.form["kentta"]
         if session['username']:
+            print(session['username'])
             queries.uusi_treeni(session['username'], vapaa_kentta)
         return redirect("/")
 

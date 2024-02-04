@@ -6,6 +6,6 @@ CREATE TABLE users (
 
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
-    username TEXT,
+    user_id TEXT,
     field TEXT
 );
