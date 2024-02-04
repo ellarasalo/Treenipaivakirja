@@ -16,8 +16,31 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä näkee statistiikkasivulla treenien määrän viikon, kuukauden ja vuoden aikana.
 - Käyttäjä voi määritellä näkyykö statistiikkasivu ainoastaan kavereille vai kaikille käyttäjille.
 
-<!---
-gitelras/tietokantasovellus is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+## Tällä hetkellä
+
+- Käyttäjä voi luoda tunnuksen ja kirjautua sisään ja ulos.
+- Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
+
+## Ota sovellus käyttöön näin
+
+Luo virtuaaliympäristö sovellusta varten
+```bash
+python3 -m venv venv
+```
+Aktivoi virtuaaliympäristö
+```bash
+source venv/bin/activate
+```
+Asenna flask-kirjasto
+```bash
+pip install flask
+```
+Käynnistä sovellus
+```bash
+flask run
+```
+
+
+
+
 
