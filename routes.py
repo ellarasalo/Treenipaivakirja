@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, make_response
 from app import db
 from sqlalchemy.sql import text
 import queries
@@ -7,6 +7,20 @@ import queries
 @app.route("/")
 def index():
     return render_template("etusivu.html")
+
+@app.route("/kaveripyynto", methods=["POST"])
+def pyynto():
+    friend_username = request.args.get("nimi")
+    return redirect("/search?showbutton=false&haku=" + friend_username)
+
+@app.route("/search")
+def search_result():
+    show_button = not request.args.get("showbutton", "true") == "false"
+    print(show_button)
+    kaveri = request.args.get("haku")
+    if queries.search(kaveri):
+        return render_template("search_result.html",  nimi=kaveri, success=True, show_button=show_button) 
+    return render_template("search_result.html",  nimi=kaveri, success=None, show_button=show_button) 
 
 @app.route("/search_friends")
 def search():

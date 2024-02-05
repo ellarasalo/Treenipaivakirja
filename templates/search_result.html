@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if success %}
+<div class="search_result"> {{ nimi }} löytyi</div>
+{% if show_button %}
+<form action="/kaveripyynto?nimi={{ nimi }}" method="post">
+    <button type="submit">Lisää kaveriksi</button>
+    
+</form>
+{% endif %}
+{% else %}
+<div class="search_result"> Käyttäjää {{ nimi }} ei löytynyt</div>
+{% endif %}
+
+{% endblock %}

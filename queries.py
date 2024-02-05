@@ -29,3 +29,8 @@ def uusi_treeni(username, kentta):
     db.session.execute(sql, {"user_id":user_id, "description":kentta})
     db.session.commit()
 
+def search(kaveri):
+    sql = text("SELECT id FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username":kaveri}).fetchone()
+    return result
+

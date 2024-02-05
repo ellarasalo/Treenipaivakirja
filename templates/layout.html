@@ -11,8 +11,8 @@
 <body>
     <div id="header">
         {% if session.username %}
-        <div 
-            class="login-info">Olet kirjautunut sisään nimellä {{ session['username']}}
+        <div class="login-info">
+            Olet kirjautunut sisään nimellä {{ session['username']}}
             <a href="logout" class="button">Kirjaudu ulos</a>
         </div>
 
