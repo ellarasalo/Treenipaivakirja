@@ -18,8 +18,8 @@ def lisaa():
         return render_template("lisaa_treeni.html") 
     if request.method == "POST":
         vapaa_kentta = request.form["kentta"]
-        if session['username']:
-            print(session['username'])
+        print(session)
+        if session.get('username'):
             queries.uusi_treeni(session['username'], vapaa_kentta)
         return redirect("/")
 
