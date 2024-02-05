@@ -35,6 +35,10 @@ Asenna riippuvuudet
 ```bash
 pip install -r requirements.txt
 ```
+Ota tietokanta käyttöön
+```bash
+psql < schema.sql
+```
 Käynnistä sovellus
 ```bash
 flask run
