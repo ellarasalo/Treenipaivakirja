@@ -87,8 +87,21 @@ html, body {
 
 .login-info {
   position: absolute;
+  color: #e0ddea;
   top: 0;
   right: 0;
   margin-top: 20px;
   margin-right: 20px;
+}
+
+.lisaa_treeni {
+  color: #e0ddea;
+}
+
+.register {
+  color: #e0ddea;
+}
+
+.login {
+  color: #e0ddea;
 }
