@@ -6,7 +6,11 @@ import queries
 
 @app.route("/")
 def index():
-    return render_template("etusivu.html") 
+    return render_template("etusivu.html")
+
+@app.route("/search_friends")
+def search():
+    return render_template("search_friends.html") 
 
 @app.route("/statistics")
 def statistics():
