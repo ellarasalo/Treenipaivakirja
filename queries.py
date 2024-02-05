@@ -25,7 +25,7 @@ def uusi_treeni(username, kentta):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
-    sql = text("INSERT INTO workouts (user_id, field) VALUES (:user_id, :field)")
-    db.session.execute(sql, {"user_id":user_id, "field":kentta})
+    sql = text("INSERT INTO workouts (user_id, description) VALUES (:user_id, :description)")
+    db.session.execute(sql, {"user_id":user_id, "description":kentta})
     db.session.commit()
 
