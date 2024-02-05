@@ -12,3 +12,10 @@ CREATE TABLE workouts (
     intensity TEXT,
     friend_id INT
 );
+
+CREATE TABLE friend_requests (
+    id SERIAL PRIMARY KEY,
+    sender_id INT,
+    receiver_id INT,
+    status INT
+);
