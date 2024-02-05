@@ -31,9 +31,9 @@ Aktivoi virtuaaliympäristö
 ```bash
 source venv/bin/activate
 ```
-Asenna flask-kirjasto
+Asenna riippuvuudet
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 Käynnistä sovellus
 ```bash
