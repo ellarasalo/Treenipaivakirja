@@ -28,7 +28,8 @@ def search():
 
 @app.route("/statistics")
 def statistics():
-    return render_template("statistics.html") 
+    return render_template("statistics.html") # hakee kansiosta html sivun ja 
+#rakentaa sivun ja lähettää valmiin html sivun selaimelle ja sitten selain saa sivun ja näyttää sen 
 
 @app.route("/lisaa", methods=["GET", "POST"])
 def lisaa():
@@ -39,7 +40,8 @@ def lisaa():
         print(session)
         if session.get('username'):
             queries.uusi_treeni(session['username'], vapaa_kentta)
-        return redirect("/")
+        return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
+    # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -49,10 +51,10 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if queries.login(password, username):
-            session['username'] = username
+        if queries.login(password, username): 
+            session['username'] = username 
         else:
-            return redirect("login.html") # lisää virheviesti väärä käyttäjänimi/käyttäjää ei ole tai salasana
+            return redirect("/login") # lisää virheviesti väärä käyttäjänimi/käyttäjää ei ole tai salasana
         return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -64,7 +66,7 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return redirect("register.html") # lisää virheviesti salasanat eroavat
+            return redirect("/register") # lisää virheviesti salasanat eroavat
         queries.register(password2, username)
         return redirect("/")
     
