@@ -21,13 +21,20 @@ def login(password, username):
         else:
             return False
 
-def uusi_treeni(username, kentta):
+def add_workout(username, description):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
-    sql = text("INSERT INTO workouts (description) VALUES (:description)")
-    db.session.execute(sql, {"description":kentta})
+    sql = text("INSERT INTO workouts (description) VALUES (:description) RETURNING id")
+    db.session.execute(sql, {"description":description})
+    result = db.session.execute(sql, {"description":description}).fetchone()
+    thread_id = result[0]
     db.session.commit()
+
+    sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
+    db.session.execute(sql, {"user_id":user_id, "workout_id":thread_id})
+    db.session.commit()
+
 
 def search(kaveri):
     sql = text("SELECT id FROM users WHERE username=:username")

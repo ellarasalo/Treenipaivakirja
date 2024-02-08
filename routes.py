@@ -39,7 +39,7 @@ def lisaa():
         vapaa_kentta = request.form["kentta"]
         print(session)
         if session.get('username'):
-            queries.uusi_treeni(session['username'], vapaa_kentta)
+            queries.add_workout(session['username'], vapaa_kentta)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
     # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
 
