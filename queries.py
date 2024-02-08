@@ -22,7 +22,6 @@ def login(password, username):
             return False
 
 def add_workout(username, description):
-    print('moi')
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
@@ -40,13 +39,11 @@ def get_workouts(username):
         JOIN user_workouts uw ON w.id = uw.workout_id
         JOIN users u ON u.id = uw.user_id
         WHERE u.username = :username
+        ORDER BY w.timestamp DESC
     """)
     result = db.session.execute(sql, {"username": username}).fetchall()
     workouts = [row[0] for row in result]
-    print(workouts)
     return workouts
-
-
 
 def search(kaveri):
     sql = text("SELECT id FROM users WHERE username=:username")
