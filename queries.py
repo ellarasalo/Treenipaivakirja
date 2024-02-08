@@ -29,11 +29,23 @@ def add_workout(username, description):
     db.session.execute(sql, {"description":description})
     result = db.session.execute(sql, {"description":description}).fetchone()
     thread_id = result[0]
-    db.session.commit()
-
     sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
     db.session.execute(sql, {"user_id":user_id, "workout_id":thread_id})
     db.session.commit()
+
+def get_workouts(username):
+    sql = text("""
+        SELECT w.description
+        FROM workouts w
+        JOIN user_workouts uw ON w.id = uw.workout_id
+        JOIN users u ON u.id = uw.user_id
+        WHERE u.username = :username
+    """)
+    result = db.session.execute(sql, {"username": username}).fetchall()
+    workouts = [row[0] for row in result]
+    print(workouts)
+    return workouts
+
 
 
 def search(kaveri):

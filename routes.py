@@ -6,7 +6,11 @@ import queries
 
 @app.route("/")
 def index():
-    return render_template("etusivu.html")
+    if session.get('username'):
+        workouts = queries.get_workouts(session['username'])
+        return render_template("etusivu.html", workouts=workouts) #tyhjä lista jos ei kirjautunut
+    return render_template("etusivu.html", workouts=[])
+    
 
 @app.route("/kaveripyynto", methods=["POST"])
 def pyynto():
