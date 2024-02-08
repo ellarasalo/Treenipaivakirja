@@ -23,6 +23,13 @@ Sovelluksen ominaisuuksia:
 
 ## Ota sovellus käyttöön näin
 
+Kloonaa tämä repositorio ja siirry sen juurikansioon.
+
+Luo juurikansioon ```bash .env```niminen tiedosto ja määritä sen sisältö näin:
+```bash
+DATABASE_URL=<tietokannan-paikallinen-osoite>
+SECRET_KEY=<salainen-avain>
+```
 Luo virtuaaliympäristö sovellusta varten
 ```bash
 python3 -m venv venv
