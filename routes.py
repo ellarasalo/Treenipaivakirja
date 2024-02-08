@@ -4,14 +4,16 @@ from app import db
 from sqlalchemy.sql import text
 import queries
 
+def is_login():
+    return session.get('username')
+
 @app.route("/")
 def index():
-    if session.get('username'):
+    if is_login():
         workouts = queries.get_workouts(session['username'])
-        return render_template("etusivu.html", workouts=workouts) #tyhjä lista jos ei kirjautunut
+        return render_template("etusivu.html", workouts=workouts) 
     return render_template("etusivu.html", workouts=[])
     
-
 @app.route("/kaveripyynto", methods=["POST"])
 def pyynto():
     friend_username = request.args.get("nimi")
@@ -40,13 +42,14 @@ def lisaa():
     if request.method == "GET":
         return render_template("lisaa_treeni.html") 
     if request.method == "POST":
-        vapaa_kentta = request.form["kentta"]
-        print(session)
-        if session.get('username'):
-            queries.add_workout(session['username'], vapaa_kentta)
+        description = request.form["description"]
+        sport = request.form["sport"]
+        duration = request.form["duration"]
+        intensity = request.form["intensity"]
+        if is_login():
+            queries.add_workout(session['username'], description, sport, duration, intensity)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
     # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

@@ -7,9 +7,10 @@ CREATE TABLE users (
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
     timestamp TIMESTAMP,
-    description TEXT,
     sport TEXT,
-    intensity TEXT
+    duration TEXT,
+    intensity TEXT,
+    description TEXT
 );
 
 CREATE TABLE user_workouts (

@@ -21,12 +21,17 @@ def login(password, username):
         else:
             return False
 
-def add_workout(username, description):
+def add_workout(username, description, sport, duration, intensity):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
-    sql = text("INSERT INTO workouts (description, timestamp) VALUES (:description, CURRENT_TIMESTAMP) RETURNING id")
-    result = db.session.execute(sql, {"description":description}).fetchone()
+    sql = text("""INSERT INTO workouts (description, timestamp, sport, duration, intensity) 
+               VALUES (:description, CURRENT_TIMESTAMP, :sport, :duration, :intensity) 
+               RETURNING id""")
+    result = db.session.execute(sql, {"description":description, 
+                                      "sport": sport, 
+                                      "duration": duration, 
+                                      "intensity": intensity}).fetchone()
     thread_id = result[0]
     sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
     db.session.execute(sql, {"user_id":user_id, "workout_id":thread_id})
