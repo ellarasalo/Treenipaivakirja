@@ -22,11 +22,11 @@ def login(password, username):
             return False
 
 def add_workout(username, description):
+    print('moi')
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
-    sql = text("INSERT INTO workouts (description) VALUES (:description) RETURNING id")
-    db.session.execute(sql, {"description":description})
+    sql = text("INSERT INTO workouts (description, timestamp) VALUES (:description, CURRENT_TIMESTAMP) RETURNING id")
     result = db.session.execute(sql, {"description":description}).fetchone()
     thread_id = result[0]
     sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
