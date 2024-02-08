@@ -6,16 +6,32 @@ CREATE TABLE users (
 
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
-    user_id INT,
     description TEXT,
     sport TEXT,
-    intensity TEXT,
-    friend_id INT
+    intensity TEXT
+);
+
+CREATE TABLE user_workouts (
+    user_id INT,
+    workout_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (workout_id) REFERENCES workouts(id),
+    PRIMARY KEY (user_id, workout_id) 
+);
+
+CREATE TABLE friends (
+    user_id1 INT,
+    user_id2 INT,
+    FOREIGN KEY (user_id1) REFERENCES users(id),
+    FOREIGN KEY (user_id2) REFERENCES users(id),
+    PRIMARY KEY (user_id1, user_id2)
 );
 
 CREATE TABLE friend_requests (
-    id SERIAL PRIMARY KEY,
     sender_id INT,
     receiver_id INT,
-    status INT
+    status INT,
+    PRIMARY KEY (sender_id, receiver_id) 
 );
+
+
