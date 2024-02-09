@@ -20,6 +20,7 @@ Sovelluksen ominaisuuksia:
 
 - Käyttäjä voi luoda tunnuksen ja kirjautua sisään ja ulos.
 - Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
+- Käyttäjä näkee sovelluksen etusivulla omat treenit
 
 ## Ota sovellus käyttöön näin
 
