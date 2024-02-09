@@ -39,7 +39,7 @@ def add_workout(username, description, sport, duration, intensity):
 
 def get_workouts(username):
     sql = text("""
-        SELECT w.description
+        SELECT w.*
         FROM workouts w
         JOIN user_workouts uw ON w.id = uw.workout_id
         JOIN users u ON u.id = uw.user_id
@@ -47,7 +47,7 @@ def get_workouts(username):
         ORDER BY w.timestamp DESC
     """)
     result = db.session.execute(sql, {"username": username}).fetchall()
-    workouts = [row[0] for row in result]
+    workouts = [row for row in result]
     return workouts
 
 def search(kaveri):

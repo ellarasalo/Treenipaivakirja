@@ -8,7 +8,7 @@ html, body {
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: linear-gradient(to bottom,
    #2a001b 0%,
-   
+  
    #4d3b88 100%); /*#4d3b88 #4a378b*/
 }
 
@@ -94,22 +94,10 @@ html, body {
   margin-right: 20px;
 }
 
-.lisaa_treeni {
+.whiteclass {
   color: #e0ddea;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-decoration: none;
 }
 
-.register {
-  color: #e0ddea;
-}
-
-.login {
-  color: #e0ddea;
-}
-
-.search {
-  color: #e0ddea;
-}
-
-.search_result {
-  color: #e0ddea;
-}

@@ -11,10 +11,10 @@ def is_login():
 def index():
     if is_login():
         workouts = queries.get_workouts(session['username'])
-        return render_template("etusivu.html", workouts=workouts) 
-    return render_template("etusivu.html", workouts=[])
+        return render_template("frontpage.html", workouts=workouts) 
+    return render_template("frontpage.html", workouts=[])
     
-@app.route("/kaveripyynto", methods=["POST"])
+@app.route("/friendrequest", methods=["POST"])
 def pyynto():
     friend_username = request.args.get("nimi")
     return redirect("/search?showbutton=false&haku=" + friend_username)
@@ -23,10 +23,10 @@ def pyynto():
 def search_result():
     show_button = not request.args.get("showbutton", "true") == "false"
     print(show_button)
-    kaveri = request.args.get("haku")
-    if queries.search(kaveri):
-        return render_template("search_result.html",  nimi=kaveri, success=True, show_button=show_button) 
-    return render_template("search_result.html",  nimi=kaveri, success=None, show_button=show_button) 
+    friend = request.args.get("haku")
+    if queries.search(friend):
+        return render_template("search_result.html",  nimi=friend, success=True, show_button=show_button) 
+    return render_template("search_result.html",  nimi=friend, success=None, show_button=show_button) 
 
 @app.route("/search_friends")
 def search():
@@ -37,10 +37,10 @@ def statistics():
     return render_template("statistics.html") # hakee kansiosta html sivun ja 
 #rakentaa sivun ja lähettää valmiin html sivun selaimelle ja sitten selain saa sivun ja näyttää sen 
 
-@app.route("/lisaa", methods=["GET", "POST"])
+@app.route("/add", methods=["GET", "POST"])
 def lisaa():
     if request.method == "GET":
-        return render_template("lisaa_treeni.html") 
+        return render_template("new_workout.html") 
     if request.method == "POST":
         description = request.form["description"]
         sport = request.form["sport"]
