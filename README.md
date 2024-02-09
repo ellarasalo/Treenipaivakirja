@@ -21,13 +21,13 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi luoda tunnuksen ja kirjautua sisään ja ulos.
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
-- Käyttäjä näkee sovelluksen etusivulla omat treenit
+- Käyttäjä näkee sovelluksen etusivulla omat treenit.
 
 ## Ota sovellus käyttöön näin
 
 Kloonaa tämä repositorio ja siirry sen juurikansioon.
 
-Luo juurikansioon ```bash .env```niminen tiedosto ja määritä sen sisältö näin:
+Luo juurikansioon ```bash .env``` niminen tiedosto ja määritä sen sisältö näin:
 ```bash
 DATABASE_URL=<tietokannan-paikallinen-osoite>
 SECRET_KEY=<salainen-avain>
