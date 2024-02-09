@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if success %}
-<div class="whiteclass"> {{ nimi }} löytyi</div>
+<div class="whiteclass"> {{ name }} löytyi</div>
 {% if show_button %}
-<form action="/friendrequest?nimi={{ nimi }}" method="post">
+<form action="/friendrequest?name={{ name }}" method="post">
     <button type="submit">Lisää kaveriksi</button>
     
 </form>
 {% endif %}
 {% else %}
-<div class="search_result"> Käyttäjää {{ nimi }} ei löytynyt</div>
+<div class="whiteclass"> Käyttäjää {{ name }} ei löytynyt</div>
 {% endif %}
 
 {% endblock %}

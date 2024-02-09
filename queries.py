@@ -50,8 +50,8 @@ def get_workouts(username):
     workouts = [row for row in result]
     return workouts
 
-def search(kaveri):
+def search(friend):
     sql = text("SELECT id FROM users WHERE username=:username")
-    result = db.session.execute(sql, {"username":kaveri}).fetchone()
+    result = db.session.execute(sql, {"username":friend}).fetchone()
     return result
 

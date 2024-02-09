@@ -16,17 +16,17 @@ def index():
     
 @app.route("/friendrequest", methods=["POST"])
 def pyynto():
-    friend_username = request.args.get("nimi")
-    return redirect("/search?showbutton=false&haku=" + friend_username)
+    friend_username = request.args.get("name")
+    return redirect("/search?showbutton=false&search=" + friend_username)
 
 @app.route("/search")
 def search_result():
     show_button = not request.args.get("showbutton", "true") == "false"
     print(show_button)
-    friend = request.args.get("haku")
+    friend = request.args.get("search")
     if queries.search(friend):
-        return render_template("search_result.html",  nimi=friend, success=True, show_button=show_button) 
-    return render_template("search_result.html",  nimi=friend, success=None, show_button=show_button) 
+        return render_template("search_result.html",  name=friend, success=True, show_button=show_button) 
+    return render_template("search_result.html",  name=friend, success=None, show_button=show_button) 
 
 @app.route("/search_friends")
 def search():
