@@ -8,7 +8,13 @@
     <p>
     Salasana uudestaan: <input type="password" name="password2">
     <p>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    
     <input type="submit" value="Luo tunnus">
+
 </form>
 
 {% endblock %}

@@ -6,6 +6,11 @@
     <p>
     Salasana: <input type="password" name="password">
     <p>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
     <input type="submit" value="Kirjaudu">
     Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
     </form>

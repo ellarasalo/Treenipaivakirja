@@ -53,6 +53,7 @@ def lisaa():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    error_message = None
     if request.method == "GET":
         return render_template("login.html") 
     if request.method == "POST":
@@ -61,7 +62,8 @@ def login():
         if queries.login(password, username): 
             session['username'] = username 
         else:
-            return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
+            error_message = "Väärä käyttäjätunnus tai salasana"
+            return render_template("login.html", error_message=error_message)
         return redirect("/")
     
 def is_invalid_input(input_text):
@@ -69,6 +71,7 @@ def is_invalid_input(input_text):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    error_message = None
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
@@ -76,12 +79,17 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            return render_template("error.html", message="Salasanat eroavat")
-        if is_invalid_input(username) or is_invalid_input(password1):
-            return render_template("error.html", message="Tyhjä nimimerkki tai salasana ei kelpaa")
-        queries.register(password2, username)
-        return redirect("/")
-    
+            error_message = "Salasanat eroavat"
+        elif is_invalid_input(username) or is_invalid_input(password1):
+            error_message = "Tyhjä nimimerkki tai salasana ei kelpaa"
+        else:
+            try:
+                queries.register(password2, username)
+                return redirect("/")
+            except Exception as e:
+                error_message = f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi."
+        return render_template("register.html", error_message=error_message)
+
 @app.route("/logout")
 def logout():
     if request.method == "GET":

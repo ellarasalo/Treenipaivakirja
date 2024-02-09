@@ -3,10 +3,13 @@ from app import db
 from sqlalchemy.sql import text
 
 def register(password, username):
+    print(username)
     hash_value = generate_password_hash(password)
     sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
     db.session.execute(sql, {"username":username, "password":hash_value})
     db.session.commit()
+    print('tullaanko tänne')
+
 
 def login(password, username):
     sql = text("SELECT id, password FROM users WHERE username=:username")
