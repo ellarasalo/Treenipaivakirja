@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="whiteclass">
+    <p>Kaveripyynnöt</p>
+    {% for request in requests %}
+        <div class="box">{{ request }}</div> 
+    {% endfor %}
+</div>
+
+{% endblock %}

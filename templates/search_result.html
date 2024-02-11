@@ -3,7 +3,7 @@
 {% if success %}
 <div class="whiteclass"> {{ name }} löytyi</div>
 {% if show_button %}
-<form action="/friendrequest?name={{ name }}" method="post">
+<form action="/new_friendrequest?name={{ name }}" method="post">
     <button type="submit">Lisää kaveriksi</button>
     
 </form>
