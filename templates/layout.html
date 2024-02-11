@@ -9,14 +9,6 @@
 </head>
 
 <body>
-    <div id="header">
-        {% if session.username %}
-        <div class="login-info">
-            Olet kirjautunut sisään nimellä {{ session['username']}}
-        </div>
-        {% endif %}
-        <a href="/" class="title">Treenipäiväkirja</a>
-    </div>
 
     <div class="navbar">
         {% block navbar %}
@@ -32,6 +24,14 @@
             <a href="search_friends" class="nav-link">Hae kavereita</a>
         {% endif %}
         {% endblock %}
+    </div>
+    <div id="header">
+        {% if session.username %}
+        <div class="login-info">
+            Olet kirjautunut sisään nimellä {{ session['username']}}
+        </div>
+        {% endif %}
+        <a href="/" class="title">Treenipäiväkirja</a>
     </div>
 
     <div id="content">
