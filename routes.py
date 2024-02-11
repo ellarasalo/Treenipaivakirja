@@ -3,9 +3,7 @@ from flask import render_template, request, redirect, session, make_response
 from app import db
 from sqlalchemy.sql import text
 import queries
-
-def is_login():
-    return session.get('username')
+import sports
 
 @app.route("/")
 def index():
@@ -13,10 +11,17 @@ def index():
         workouts = queries.get_workouts(session['username'])
         return render_template("frontpage.html", workouts=workouts) 
     return render_template("frontpage.html", workouts=[])
-    
-@app.route("/friendrequest", methods=["POST"])
+
+@app.route("/friendrequests")
+def new_friend_request():
+    requests = queries.get_friendrequests(session['username'])
+    return render_template("friendrequests.html", requests=requests) 
+
+
+@app.route("/new_friendrequest", methods=["POST"])
 def pyynto():
     friend_username = request.args.get("name")
+    queries.send_friendrequest(session["username"], friend_username)
     return redirect("/search?showbutton=false&search=" + friend_username)
 
 @app.route("/search")
@@ -40,7 +45,8 @@ def statistics():
 @app.route("/add", methods=["GET", "POST"])
 def lisaa():
     if request.method == "GET":
-        return render_template("new_workout.html") 
+        return render_template("new_workout.html", sport=sports.sport, 
+                               duration=sports.duration, intensity=sports.intensity) 
     if request.method == "POST":
         description = request.form["description"]
         sport = request.form["sport"]
@@ -66,8 +72,11 @@ def login():
             return render_template("login.html", error_message=error_message)
         return redirect("/")
     
-def is_invalid_input(input_text):
+def is_invalid_input(input_text): 
     return not input_text.strip()
+# omaan tidostoon?
+def is_login():
+    return session.get('username')
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
