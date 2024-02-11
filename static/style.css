@@ -9,7 +9,7 @@ html, body {
   background: linear-gradient(to bottom,
    #2a001b 0%,
   
-   #4d3b88 100%); /*#4d3b88 #4a378b*/
+   #4d3b88 100%);
 }
 
 #header {
@@ -29,7 +29,7 @@ html, body {
 }
 
 .box {
-  width: 50%; 
+  width: 700px; 
   background-color: #312248;
   padding: 20px;
   margin: 10px 0;
@@ -45,45 +45,6 @@ html, body {
   color: #e0ddea;
 }
 
-.button-container {
-  display: flex;
-}
-
-.circle-button {
-  display: inline-block;
-  margin: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Makes the button circular */
-  border: none;
-  background-color: #2a55e3; 
-  color: rgb(46, 46, 46);
-  font-size: 20px;
-  line-height: 40px; /* Centers the plus sign vertically */
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.circle-button:focus {
-  outline: none;
-}
-
-.button {
-  display: inline-block;
-  margin: 0px;
-  width: 100px;
-  height: 100px;
-  border-radius: 10%; /* Makes the button circular */
-  border: none;
-  background-color:  #c9bdf5; /* Green color */
-  color: rgb(46, 46, 46);
-  font-size: 20px;
-  line-height: 40px; /* Centers the plus sign vertically */
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-}
 
 .login-info {
   position: absolute;
@@ -99,5 +60,25 @@ html, body {
   font-size: 20px;
   margin-bottom: 10px;
   text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Keskitä pystysuunnassa */
+  padding: 15px 400px;
+  background-color: #2a001b; /*#35172b #35142a #3a0e2c*/
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e0ddea;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
 }
 
