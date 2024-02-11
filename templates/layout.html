@@ -13,11 +13,13 @@
     <div class="navbar">
         {% block navbar %}
         {% if session.username %}
+            <a href="/" class="nav-link">Tervetuloa <span>{{ session['username']}}</span></a>
             <a href="add" class="nav-link">Lisää treeni</a>
             <a href="statistics" class="nav-link">Omat tilastot</a>
             <a href="friendrequests" class="nav-link">Kaveripyynnöt</a>
             <a href="search_friends" class="nav-link">Hae kavereita</a>
             <a href="logout" class="nav-link">Kirjaudu ulos</a>
+    </div>
         {% else %}
             <a href="login" class="nav-link">Kirjaudu sisään</a>
             <a href="register" class="nav-link">Luo käyttäjätunnus</a>
@@ -26,11 +28,6 @@
         {% endblock %}
     </div>
     <div id="header">
-        {% if session.username %}
-        <div class="login-info">
-            Olet kirjautunut sisään nimellä {{ session['username']}}
-        </div>
-        {% endif %}
         <a href="/" class="title">Treenipäiväkirja</a>
     </div>
 

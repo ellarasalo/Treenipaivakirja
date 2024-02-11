@@ -7,7 +7,6 @@ html, body {
   letter-spacing: -0.022em;
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #000b00; /*#000100 #011b20b1*/
-  
 }
 
 #header {
@@ -17,6 +16,10 @@ html, body {
   align-items: center;
   text-align: center;
   padding: 20px;
+}
+
+#header:hover {
+  opacity: 0.8;
 }
 
 #content {
@@ -33,16 +36,6 @@ html, body {
   color: #e0ddea;
 }
 
-
-.login-info {
-  position: absolute;
-  color: #e0ddea;
-  top: 0;
-  right: 0;
-  margin-top: 20px;
-  margin-right: 20px;
-}
-
 .whiteclass {
   color: #e0ddea;
   font-size: 20px;
@@ -51,7 +44,7 @@ html, body {
 }
 
 .box {
-  width: 700px; 
+  width: 500px; 
   background-color: #0c2a30; /* #133430 #13302d*/
   padding: 20px;
   margin: 10px 0;
@@ -67,8 +60,9 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center; /* Keskitä pystysuunnassa */
-  padding: 15px 400px;
+  padding: 15px 100px;
   background-color: #011b20b1; /*#0d2220*/
+
 }
 
 .nav-link {
