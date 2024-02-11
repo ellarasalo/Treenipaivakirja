@@ -94,6 +94,7 @@ def register():
         else:
             try:
                 queries.register(password2, username)
+                session['username'] = username
                 return redirect("/")
             except Exception as e:
                 error_message = f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi."
