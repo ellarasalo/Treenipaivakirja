@@ -21,11 +21,11 @@
     <div class="navbar">
         {% block navbar %}
         {% if session.username %}
-            <a href="logout" class="nav-link">Kirjaudu ulos</a>
-            <a href="statistics" class="nav-link">Statistiikka</a>
             <a href="add" class="nav-link">Lisää treeni</a>
-            <a href="search_friends" class="nav-link">Hae kavereita</a>
+            <a href="statistics" class="nav-link">Omat tilastot</a>
             <a href="friendrequests" class="nav-link">Kaveripyynnöt</a>
+            <a href="search_friends" class="nav-link">Hae kavereita</a>
+            <a href="logout" class="nav-link">Kirjaudu ulos</a>
         {% else %}
             <a href="login" class="nav-link">Kirjaudu sisään</a>
             <a href="register" class="nav-link">Luo käyttäjätunnus</a>
