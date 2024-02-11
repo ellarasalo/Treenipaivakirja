@@ -1,19 +1,12 @@
 
 {% extends "layout.html" %}
 {% block content %}
-{% if session.username %}
 
 <div id="content">
     {% for workout in workouts %}
         <div class="box">{{ workout }}</div> 
     {% endfor %}
 </div>
-{% else %}
-<div>
-    <a href="login" class="button">Kirjaudu sisään</a>
-    <a href="register" class="button">Luo käyttäjätunnus</a>
-    <a href="search_friends" class="button">Hae kavereita</a>
-</div>
-{% endif %}
+
 
 {% endblock %}
