@@ -6,12 +6,8 @@ html, body {
   font-weight: 400;
   letter-spacing: -0.022em;
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: linear-gradient(to bottom,
-  #000100 0%,
- 
-  #011b20b1 100%);
+  background: #000b00; /*#000100 #011b20b1*/
   
-
 }
 
 #header {
