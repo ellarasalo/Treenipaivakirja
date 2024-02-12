@@ -6,7 +6,15 @@ html, body {
   font-weight: 400;
   letter-spacing: -0.022em;
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #000b00; /*#000100 #011b20b1*/
+}
+
+body {
+  background: linear-gradient(to bottom,
+  #000100 0%,
+  #01313af7 100%); /* #011b20b1*/
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #header {
@@ -45,7 +53,7 @@ html, body {
 
 .box {
   width: 500px; 
-  background-color: #0c2a30; /* #133430 #13302d*/
+  background-color: #294447; /* #0c2a30#133430 #13302d*/
   padding: 20px;
   margin: 10px 0;
   text-align: center;
@@ -68,7 +76,7 @@ html, body {
 .nav-link {
   text-decoration: none;
   color: #e0ddea;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
   font-weight: 300;
 }
@@ -77,3 +85,65 @@ html, body {
   opacity: 0.8;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: #2c3e50;  /* Tumman harmaa väri */
+  padding: 30px;  /* Kasvatetaan sisäistä tyhjää tilaa */
+  border-radius: 12px;  /* Pyöristetään reunat */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* Lisätään hieman varjoa */
+}
+
+label {
+  margin-bottom: 8px;
+  color: #ecf0f1;  /* Vaalea tekstiväri */
+}
+
+/* Lisätään vaalea tekstiväri myös input-kentille */
+/* Lisää kohdistuminen kaikkiin input-kenttiin */
+input {
+  color: #ecf0f1;
+  border: 1px solid #0c1111; 
+  background-color: #34495e;  /* Harmaa taustaväri */
+  /* Poista reunaviiva border: none;   */
+  border-radius: 8px;  /* Pyöristä reunat */
+  padding: 8px;  /* Lisää sisäistä tyhjää tilaa */
+  margin-bottom: 10px;  /* Lisää etäisyyttä kenttien välille */
+}
+
+/* Kohdista hover-efekti kaikkiin input-kenttiin */
+input:hover {
+  background-color: #2c3e50;  /* Tumman harmaa taustaväri hover-tilassa */
+}
+
+/* Kohdista placeholder-teksti kaikkiin input-kenttiin */
+input::placeholder {
+  color: #bdc3c7;  /* Vaaleampi harmaa väri placeholder-tekstille */
+}
+
+/* Kohdista focus-efekti kaikkiin input-kenttiin */
+input:focus {
+  outline: none;  /* Poista selkeästi näkyvä focus-kehys */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  /* Lisää hieman varjoa focus-tilassa */
+}
+
+
+/* Hover-efekti painikkeelle */
+input[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+}

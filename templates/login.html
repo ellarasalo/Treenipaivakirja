@@ -1,18 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<form action="/login" method="post" class="whiteclass">
-    Tunnus: <input type="text" name="username">
-    <p>
-    Salasana: <input type="password" name="password">
-    <p>
+<div class="container">
+    <form action="/login" method="post" class="login-form">
+        <label for="username">Tunnus:</label>
+        <input type="text" name="username" id="username">
 
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
+        <label for="password">Salasana:</label>
+        <input type="password" name="password" id="password">
 
-    <input type="submit" value="Kirjaudu">
-    Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">Kirjaudu</button>
     </form>
-   
+
+    <p class="register-link">Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a></p>
+</div>
+
 {% endblock %}
