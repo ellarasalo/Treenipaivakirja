@@ -35,7 +35,7 @@ def register(password, username):
     sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
     db.session.execute(sql, {"username":username, "password":hash_value})
     db.session.commit()
-    print('tullaanko tänne')
+    
 
 
 def login(password, username):

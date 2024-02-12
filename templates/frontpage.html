@@ -4,7 +4,15 @@
 
 <div id="content">
     {% for workout in workouts %}
-        <div class="box">{{ workout }}</div> 
+    <div class="box">
+        <p class="timestamp">{{ workout.timestamp.strftime('%d.%m.%Y') }}</p>
+        <p class="workout-info">{{ workout.sport}}</p>
+        <p class="workout-info">{{ workout.intensity }}</p>
+        <p class="workout-info">{{ workout.duration }}</p>
+        {% if workout.description and workout.description.strip() %}
+            <p class="workout-description">{{ workout.description }}</p>
+        {% endif %}
+    </div> 
     {% endfor %}
 </div>
 

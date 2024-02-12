@@ -1,27 +1,27 @@
 sport = [
-    ("jooga", "Jooga"),
-    ("pyöräily", "Pyöräily"),
-    ("kuntosali", "Kuntosali"),
-    ("sulkapallo", "Sulkapallo"),
-    ("tennis", "Tennis"),
-    ("juoksu", "Juoksu"),
-    ("kävely", "Kävely"),
+    ("Jooga", "Jooga"),
+    ("Pyöräily", "Pyöräily"),
+    ("Kuntosali", "Kuntosali"),
+    ("Sulkapallo", "Sulkapallo"),
+    ("Tennis", "Tennis"),
+    ("Juoksu", "Juoksu"),
+    ("Kävely", "Kävely"),
 ]
 
 duration = [
-    ("20", "20 min"),
-    ("30", "30 min"),
-    ("45", "45 min"),
-    ("60", "60 min"),
-    ("75", "75 min"),
-    ("90", "90 min"),
-    ("120", "120 min"),
+    ("20 min", "20"),
+    ("30 min", "30"),
+    ("45 min", "45"),
+    ("60 min", "60"),
+    ("75 min", "75"),
+    ("90 min", "90"),
+    ("120 min", "120"),
 ]
 
 intensity = [
-    ("veryhard", "Erittäin raskas"),
-    ("hard", "Raskas"),
-    ("moderate", "Kohtalainen"),
-    ("easy", "Kevyt"),
-    ("veryeasy", "Erittäin kevyt"),
+    ("Erittäin raskas", "Erittäin raskas"),
+    ("Raskas", "Raskas"),
+    ("Kohtalainen", "Kohtalainen"),
+    ("Kevyt", "Kevyt"),
+    ("Erittäin kevyt", "Erittäin kevyt"),
 ]

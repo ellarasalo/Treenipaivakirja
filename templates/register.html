@@ -1,20 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="container">
+    <div id="content">
+        <form action="/register" method="post" class="login-register-form">
+            <label class="miniwhiteclass">Nimimerkki</label>
+            <div class="form-group">
+                <input type="text" name="username">
+            </div>
+            <label class="miniwhiteclass">Salasana</label>
+            <div class="form-group">
+                <input type="password" name="password1">
+            </div>
+            <label class="miniwhiteclass">Salasana uudestaan</label>
+            <div class="form-group">
+                <input type="password" name="password2">
+            </div>
+            
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
 
-<form action="/register" method="post" class="whiteclass">
-    Nimimerkki: <input type="text" name="username">
-    <p>
-    Salasana: <input type="password" name="password1">
-    <p>
-    Salasana uudestaan: <input type="password" name="password2">
-    <p>
+            <input type="submit" value="Luo tunnus">
 
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
-    
-    <input type="submit" value="Luo tunnus">
-
-</form>
-
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -2,21 +2,26 @@
 {% block content %}
 
 <div class="container">
-    <form action="/login" method="post" class="login-form">
-        <label for="username">Tunnus:</label>
-        <input type="text" name="username" id="username">
+    <div id="content">
+        <form action="/login" method="post" class="login-register-form">
+                <label for="username" class="miniwhiteclass">Nimimerkki</label>
+            <div class="form-group">
+              
+                <input type="text" name="username" id="username">
+            </div>
+                <label for="password" class="miniwhiteclass">Salasana</label>
+            <div class="form-group">
+        
+                <input type="password" name="password" id="password">
+            </div>
 
-        <label for="password">Salasana:</label>
-        <input type="password" name="password" id="password">
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
 
-        {% if error_message %}
-            <p class="error-message">{{ error_message }}</p>
-        {% endif %}
-
-        <button type="submit" class="btn btn-primary">Kirjaudu</button>
-    </form>
-
-    <p class="register-link">Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a></p>
+            <button type="submit" class="btn btn-primary">Kirjaudu</button>
+            <p class="register-link"><a href="/register">Uusi täällä? Luo tili tästä</a></p>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
