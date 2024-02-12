@@ -26,10 +26,6 @@ body {
   padding: 20px;
 }
 
-#header:hover {
-  opacity: 0.8;
-}
-
 #content {
   display: flex;
   flex-direction: column;
@@ -41,7 +37,11 @@ body {
   font-size: 40px;
   margin-bottom: 0px;
   text-decoration: none;
-  color: #e0ddea;
+  color:#e0ddea;
+}
+
+.title:hover {
+  color: #1fd853;
 }
 
 .whiteclass {
