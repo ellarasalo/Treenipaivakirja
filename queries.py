@@ -10,6 +10,18 @@ def get_user_id(username):
         return result[0]
     return None
 
+def get_friends(username):
+    user_id = get_user_id(username)
+    sql = text("""
+        SELECT users.username
+        FROM users
+        JOIN friends ON users.id = friends.user_id1 OR users.id = friends.user_id2
+        WHERE users.id != :user_id AND (friends.user_id1 = :user_id OR friends.user_id2 = :user_id)
+    """)
+    result = db.session.execute(sql, {"user_id": user_id}).fetchall()
+    friends = [row[0] for row in result]
+    return friends
+
 def friendrequest_accepted(sender, username):
     sender_id = get_user_id(sender)
     user_id = get_user_id(username)
@@ -28,6 +40,20 @@ def friendrequest_declined(sender, username):
                 WHERE sender_id = :sender_id AND receiver_id = :user_id""")
     db.session.execute(sql, {"sender_id": sender_id, "user_id": user_id})
     db.session.commit()
+
+def is_friend(username1, username2):
+    user_id1 = get_user_id(username1)
+    user_id2 = get_user_id(username2)
+    
+    sql = text("""
+        SELECT * FROM friends
+        WHERE (user_id1 = :user_id1 AND user_id2 = :user_id2)
+        OR (user_id1 = :user_id2 AND user_id2 = :user_id1)
+    """)
+    result = db.session.execute(sql, {"user_id1": user_id1, "user_id2": user_id2}).fetchone()
+
+    return result is not None
+
 
 def is_friend_request_sent(sender_username, receiver_username):
     sender_id = get_user_id(sender_username)
@@ -135,7 +161,6 @@ def get_statistics(username):
     
     statistics = [row[0].strftime("%d.%m.%Y") for row in result]
     return statistics
-
 
 def search(friend):
     sql = text("SELECT id FROM users WHERE username=:username")

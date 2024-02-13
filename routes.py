@@ -12,6 +12,13 @@ def index():
         return render_template("frontpage.html", workouts=workouts) 
     return render_template("frontpage.html", workouts=[])
 
+@app.route("/friends")
+def friendlist():
+    if is_login():
+        friends = queries.get_friends(session['username'])
+        return render_template("friends.html", friends=friends) 
+    return render_template("friends.html", friends=[]) 
+
 @app.route("/friendrequests")
 def new_friend_request():
     requests = queries.get_friendrequests(session['username'])
@@ -31,10 +38,16 @@ def decline_friendrequest(sender):
 @app.route("/new_friendrequest", methods=["POST"])
 def pyynto():
     friend_username = request.args.get("name")
-    if queries.is_friend_request_sent(session["username"], friend_username):
+    sender_username = session["username"]
+
+    if queries.is_friend_request_sent(sender_username, friend_username):
         flash('Kaveripyyntö on jo lähetetty käyttäjälle ' + friend_username)
+    elif queries.is_friend(sender_username, friend_username):
+        flash('Sinä ja ' + friend_username + ' olette jo kavereita')
+    elif queries.is_friend_request_sent(friend_username, sender_username):
+        flash('Sinulle on jo lähetetty kaveripyyntö käyttäjältä ' + friend_username)
     else:
-        queries.send_friendrequest(session["username"], friend_username)
+        queries.send_friendrequest(sender_username, friend_username)
         flash('Lähetit kaveripyynnön käyttäjälle ' + friend_username)
     return redirect("/search?showbutton=false&search=" + friend_username)
 
