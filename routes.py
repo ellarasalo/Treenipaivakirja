@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, session, make_response
+from flask import render_template, request, redirect, session, make_response, Flask, flash
 from app import db
 from sqlalchemy.sql import text
 import queries
@@ -37,9 +37,14 @@ def pyynto():
 @app.route("/search")
 def search_result():
     show_button = not request.args.get("showbutton", "true") == "false"
-    print(show_button)
     friend = request.args.get("search")
+    error_message = None
     if queries.search(friend):
+        print(queries.search(friend)) 
+        print(friend, session['username'])
+        if friend == session['username']:
+            error_message = "Hae toisia käyttäjiä."
+            return render_template("search_result.html", error_message=error_message, name=friend, success=None, show_button=show_button) 
         return render_template("search_result.html",  name=friend, success=True, show_button=show_button) 
     return render_template("search_result.html",  name=friend, success=None, show_button=show_button) 
 
@@ -95,7 +100,7 @@ def login():
     
 def is_invalid_input(input_text): 
     return not input_text.strip()
-# omaan tidostoon?
+
 def is_login():
     return session.get('username')
 
