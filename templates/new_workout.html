@@ -10,6 +10,7 @@
             <option value="{{ value }}">{{ value }}</option>
             {% endfor %}
         </select>
+        <p name="writeTextHere">Kirjoita tähän</p>
         <input type="text" name="usersport">
     </p>
     <p>Kesto:
@@ -36,13 +37,16 @@
         document.addEventListener("DOMContentLoaded", function () {
             var sportSelect = document.querySelector('select[name="sport"]');
             var usersportInput = document.querySelector('input[name="usersport"]');
+            var writeHereText = document.querySelector('p[name="writeTextHere"]');
     
             
-            usersportInput.style.display = 'none';
+            usersportInput.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
+            writeHereText.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
     
             sportSelect.addEventListener('change', function () {
 
                 usersportInput.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
+                writeHereText.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
             });
         });
     </script>
