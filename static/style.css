@@ -239,3 +239,7 @@ button:focus {
 button.miniwhiteclass {
   font-family: inherit; 
 }
+
+.flashes {
+  color: #40a7eb;
+}
