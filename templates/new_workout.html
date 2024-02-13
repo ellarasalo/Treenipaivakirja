@@ -6,23 +6,22 @@
 
     <p>Laji:
         <select name="sport">
-            {% for value, label in sport %}
-            <option value="{{ value }}">{{ label }}</option>
+            {% for value in sport %}
+            <option value="{{ value }}">{{ value }}</option>
             {% endfor %}
         </select>
     </p>
     <p>Kesto:
         <select name="duration">
-            {% for value, label in duration %}
-            <option value="{{ value }}">{{ label }}</option>
+            {% for value in duration %}
+            <option value="{{ value }}">{{ value }}</option>
             {% endfor %}
         </select>
-        minuuttia
     </p>
     <p>Haastavuus:
         <select name="intensity">
-            {% for value, label in intensity %}
-            <option value="{{ value }}">{{ label }}</option>
+            {% for value in intensity %}
+            <option value="{{ value }}">{{ value }}</option>
             {% endfor %}
         </select>
     </p>
