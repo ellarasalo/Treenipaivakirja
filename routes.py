@@ -43,6 +43,9 @@ def search_result():
         error_message = "Tyhjä hakukenttä ei kelpaa"
         return render_template("search_result.html", error_message=error_message, name="", success=None, show_button=show_button)
     if queries.search(friend):
+        if not is_login():
+            flash('Kirjaudu sisään ja lähetä kaveripyyntö')
+            return render_template("search_friends.html")
         if friend == session['username']:
             error_message = "Hae toisia käyttäjiä."
             return render_template("search_result.html", error_message=error_message, name=friend, success=None, show_button=show_button) 
