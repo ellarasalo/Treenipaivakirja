@@ -31,7 +31,11 @@ def decline_friendrequest(sender):
 @app.route("/new_friendrequest", methods=["POST"])
 def pyynto():
     friend_username = request.args.get("name")
-    queries.send_friendrequest(session["username"], friend_username)
+    if queries.is_friend_request_sent(session["username"], friend_username):
+        flash('Kaveripyyntö on jo lähetetty käyttäjälle ' + friend_username)
+    else:
+        queries.send_friendrequest(session["username"], friend_username)
+        flash('Lähetit kaveripyynnön käyttäjälle ' + friend_username)
     return redirect("/search?showbutton=false&search=" + friend_username)
 
 @app.route("/search")

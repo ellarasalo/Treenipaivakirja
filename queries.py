@@ -29,12 +29,21 @@ def friendrequest_declined(sender, username):
     db.session.execute(sql, {"sender_id": sender_id, "user_id": user_id})
     db.session.commit()
 
+def is_friend_request_sent(sender_username, receiver_username):
+    sender_id = get_user_id(sender_username)
+    receiver_id = get_user_id(receiver_username)
+
+    sql = text("SELECT * FROM friend_requests WHERE sender_id = :sender_id AND receiver_id = :receiver_id")
+    result = db.session.execute(sql, {"sender_id": sender_id, "receiver_id": receiver_id}).fetchone()
+
+    return result is not None
+
 def send_friendrequest(username, friend):
     sender_id = get_user_id(username)
     receiver_id = get_user_id(friend)
 
-    sql = text("INSERT INTO friend_requests (sender_id, receiver_id, status) VALUES (:sender_id, :receiver_id, :status)")
-    db.session.execute(sql, {"sender_id": sender_id, "receiver_id": receiver_id, "status": 0})
+    sql = text("INSERT INTO friend_requests (sender_id, receiver_id) VALUES (:sender_id, :receiver_id)")
+    db.session.execute(sql, {"sender_id": sender_id, "receiver_id": receiver_id})
     db.session.commit()
 
 def get_friendrequests(username):

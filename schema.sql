@@ -32,7 +32,6 @@ CREATE TABLE friends (
 CREATE TABLE friend_requests (
     sender_id INT,
     receiver_id INT,
-    status INT,
     PRIMARY KEY (sender_id, receiver_id) 
 );
 
