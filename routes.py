@@ -42,10 +42,17 @@ def statistics():
     return render_template("statistics.html") # hakee kansiosta html sivun ja 
 #rakentaa sivun ja lähettää valmiin html sivun selaimelle ja sitten selain saa sivun ja näyttää sen 
 
+def create_sport_list(user_sports):
+    return list(set(user_sports + sports.sport))
+
+
 @app.route("/add", methods=["GET", "POST"])
 def lisaa():
     if request.method == "GET":
-        return render_template("new_workout.html", sport=sports.sport, 
+        user_sports = queries.get_sport(session['username'])
+        user_sports_list = create_sport_list(user_sports)
+        print('usersports;', user_sports_list)
+        return render_template("new_workout.html", sport=user_sports_list, 
                                duration=sports.duration, intensity=sports.intensity) 
     if request.method == "POST":
         description = request.form["description"]

@@ -51,6 +51,18 @@ def login(password, username):
         else:
             return False
 
+def get_sport(username):
+    sql = text("""
+        SELECT DISTINCT w.sport
+        FROM users u
+        JOIN user_workouts uw ON u.id = uw.user_id
+        JOIN workouts w ON uw.workout_id = w.id
+        WHERE u.username = :username
+    """)
+    result = db.session.execute(sql, {"username": username}).fetchall()
+    sport_list = [sport[0] for sport in result]
+    return sport_list
+
 def add_workout(username, description, sport, duration, intensity):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
