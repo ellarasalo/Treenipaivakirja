@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="whiteclass">
+    <p>Kaverit</p>
+    {% if friends %}
+        <ul>
+            {% for friend in friends %}
+                <li>{{ friend }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ei kavereita.</p>
+    {% endif %}
+</div>
+{% endblock %}
