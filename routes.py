@@ -68,7 +68,6 @@ def lisaa():
     if request.method == "GET":
         user_sports = queries.get_sport(session['username'])
         user_sports_list = create_sport_list(user_sports)
-        print('usersports;', user_sports_list)
         return render_template("new_workout.html", sport=user_sports_list, 
                                duration=sports.duration, intensity=sports.intensity) 
     if request.method == "POST":
@@ -77,13 +76,26 @@ def lisaa():
         intensity = request.form["intensity"]
         if request.form["sport"] == 'muu':
             sport = request.form["usersport"]
+            if is_invalid_input(sport):
+                return empty_choice(session['username'])
         else:
             sport = request.form["sport"]
+            if is_invalid_input(sport):
+                return empty_choice(session['username'])
         if is_login():
             queries.add_workout(session['username'], description, sport, duration, intensity)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
     # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
 
+def empty_choice(username):
+    error_message = "Valitse laji valikosta tai kirjoita muu laji valitsemalla 'muu'"
+    user_sports = queries.get_sport(username)
+    user_sports_list = create_sport_list(user_sports)
+    return render_template("/new_workout.html", sport=user_sports_list, 
+                                                duration=sports.duration, 
+                                                intensity=sports.intensity,
+                                                error_message=error_message)
+                                                           
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error_message = None
