@@ -10,6 +10,7 @@
             <option value="{{ value }}">{{ value }}</option>
             {% endfor %}
         </select>
+        <input type="text" name="usersport">
     </p>
     <p>Kesto:
         <select name="duration">
@@ -29,7 +30,20 @@
     <p>Kuvaus: <input type="text" name="description"></p>
 
     <p><input type="submit" value="Lisää treeni päiväkirjaan"></p>
-    </form>
+</form>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var sportSelect = document.querySelector('select[name="sport"]');
+            var usersportInput = document.querySelector('input[name="usersport"]');
+    
+            
+            usersportInput.style.display = 'none';
+    
+            sportSelect.addEventListener('change', function () {
 
+                usersportInput.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
+            });
+        });
+    </script>
 {% endblock %}

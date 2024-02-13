@@ -7,6 +7,7 @@ sport = [
     "Juoksu",
     "Kävely",
     "Ryhmäliikunta",
+    "muu"
 ]
 
 duration = [

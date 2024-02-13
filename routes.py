@@ -56,9 +56,12 @@ def lisaa():
                                duration=sports.duration, intensity=sports.intensity) 
     if request.method == "POST":
         description = request.form["description"]
-        sport = request.form["sport"]
         duration = request.form["duration"]
         intensity = request.form["intensity"]
+        if request.form["sport"] == 'muu':
+            sport = request.form["usersport"]
+        else:
+            sport = request.form["sport"]
         if is_login():
             queries.add_workout(session['username'], description, sport, duration, intensity)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
