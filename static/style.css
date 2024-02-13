@@ -119,8 +119,9 @@ body {
 }
 
 .nav-link:hover {
-  opacity: 0.8;
+  color: #1fd853;
 }
+
 
 .register-link a {
   color: #e0ddea !important;
