@@ -17,6 +17,16 @@ def new_friend_request():
     requests = queries.get_friendrequests(session['username'])
     return render_template("friendrequests.html", requests=requests) 
 
+@app.route("/acceptfriendrequest/<string:sender>", methods=["POST"])
+def accept_friendrequest(sender):
+    print(sender)
+    queries.friendrequest_accepted(sender, session["username"])
+    return redirect("/friendrequests")
+
+@app.route("/declinefriendrequest/<string:sender>", methods=["POST"])
+def decline_friendrequest(sender):
+    queries.friendrequest_declined(sender, session["username"])
+    return redirect("/friendrequests")
 
 @app.route("/new_friendrequest", methods=["POST"])
 def pyynto():

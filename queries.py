@@ -9,6 +9,25 @@ def get_user_id(username):
         return result[0]
     return None
 
+def friendrequest_accepted(sender, username):
+    sender_id = get_user_id(sender)
+    user_id = get_user_id(username)
+    sql1 = text("""INSERT INTO friends (user_id1, user_id2) 
+                VALUES (:sender_id, :user_id)""")
+    db.session.execute(sql1, {"sender_id": sender_id, "user_id": user_id})
+    sql2 = text("""DELETE FROM friend_requests 
+                WHERE sender_id = :sender_id AND receiver_id = :user_id""")
+    db.session.execute(sql2, {"sender_id": sender_id, "user_id": user_id})
+    db.session.commit()
+
+def friendrequest_declined(sender, username):
+    sender_id = get_user_id(sender)
+    user_id = get_user_id(username)
+    sql = text("""DELETE FROM friend_requests 
+                WHERE sender_id = :sender_id AND receiver_id = :user_id""")
+    db.session.execute(sql, {"sender_id": sender_id, "user_id": user_id})
+    db.session.commit()
+
 def send_friendrequest(username, friend):
     sender_id = get_user_id(username)
     receiver_id = get_user_id(friend)

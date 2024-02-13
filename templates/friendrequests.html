@@ -2,8 +2,14 @@
 {% block content %}
 <div class="whiteclass">
     <p>Kaveripyynnöt</p>
-    {% for request in requests %}
-        <div class="box">{{ request }}</div> 
+    {% for sender in requests %}
+        <div class="box">{{ sender }}</div> 
+        <form action="/acceptfriendrequest/{{ sender }}" method="post" class="whiteclass">
+            <button type="submit" class="miniwhiteclass">Hyväksy</button>
+        </form>
+        <form action="/declinefriendrequest/{{ sender }}" method="post" class="whiteclass">
+            <button type="submit" class="miniwhiteclass">Hylkää</button>
+        </form>
     {% endfor %}
 </div>
 
