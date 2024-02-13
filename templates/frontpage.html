@@ -5,13 +5,22 @@
 <div id="content">
     {% for workout in workouts %}
     <div class="box">
-        <p class="timestamp">{{ workout.timestamp.strftime('%d.%m.%Y') }}</p>
-        <p class="workout-info">{{ workout.sport}}</p>
-        <p class="workout-info">{{ workout.intensity }}</p>
-        <p class="workout-info">{{ workout.duration }}</p>
+        <table class="workout_table">
+            <tr>
+                <td class="workout-info miniwhiteclass">{{ workout.sport}}</td>
+                <td class="workout-info miniwhiteclass">{{ workout.duration }} min</td>
+                <td class="workout-info miniwhiteclass">{{ workout.intensity }}</td>
+                <td class="timestamp miniwhiteclass">{{ workout.timestamp.strftime('%d.%m.%Y') }}</td>
+            </tr>
+        </table>
         {% if workout.description and workout.description.strip() %}
-            <p class="workout-description">{{ workout.description }}</p>
+        <table class="description_table">
+            <tr>
+                <td>{{ workout.description }}</td>
+            </tr>
+        </table>
         {% endif %}
+        
     </div> 
     {% endfor %}
 </div>
