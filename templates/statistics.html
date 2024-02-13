@@ -2,5 +2,55 @@
 {% block content %}
 <div class="whiteclass">
     <p>statistiikkaa</p>
+    <canvas id="dateChart" width="400" height="400"></canvas>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/moment"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<script>
+    let rawDates = {{ dates | tojson }};
+    let dates = rawDates.map(dateStr => {
+        let parts = dateStr.split('.');
+        return new Date(parts[2], parts[1] - 1, parts[0]).toISOString();
+    });
+    let ctx = document.getElementById('dateChart').getContext('2d');
+
+    Chart.defaults.global.plugins.datalabels = {
+        formatter: function(value, context) {
+            return moment(value).format('DD.MM.YYYY');
+        }
+    };
+
+    let chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Päivät',
+                data: dates.map((date, index) => ({x: date, y: index})),
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                    }
+                }]
+            },
+            plugins: {
+                datalabels: {
+                    display: true,
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
 {% endblock %}

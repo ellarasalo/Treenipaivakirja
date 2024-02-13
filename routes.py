@@ -49,7 +49,8 @@ def search():
 
 @app.route("/statistics")
 def statistics():
-    return render_template("statistics.html") # hakee kansiosta html sivun ja 
+    workouts = queries.get_statistics(session["username"])
+    return render_template("statistics.html", dates=workouts) # hakee kansiosta html sivun ja 
 #rakentaa sivun ja lähettää valmiin html sivun selaimelle ja sitten selain saa sivun ja näyttää sen 
 
 def create_sport_list(user_sports):

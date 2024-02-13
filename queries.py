@@ -1,6 +1,7 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 from sqlalchemy.sql import text
+from datetime import datetime, timedelta
 
 def get_user_id(username):
     sql = text("SELECT id FROM users WHERE username=:username")
@@ -55,8 +56,6 @@ def register(password, username):
     db.session.execute(sql, {"username":username, "password":hash_value})
     db.session.commit()
     
-
-
 def login(password, username):
     sql = text("SELECT id, password FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
@@ -111,8 +110,27 @@ def get_workouts(username):
     workouts = [row for row in result]
     return workouts
 
+def get_statistics(username):
+    end_date = datetime.now()
+    start_date = datetime(end_date.year, end_date.month, 1)
+    sql = text("""
+        SELECT w.timestamp
+        FROM workouts w
+        JOIN user_workouts uw ON w.id = uw.workout_id
+        JOIN users u ON u.id = uw.user_id
+        WHERE u.username = :username AND w.timestamp BETWEEN :start_date AND :end_date
+        ORDER BY w.timestamp DESC
+    """)
+    para = {"username": username, "start_date": start_date, "end_date": end_date}
+    result = db.session.execute(sql, para).fetchall()
+    
+    statistics = [row[0].strftime("%d.%m.%Y") for row in result]
+    return statistics
+
+
 def search(friend):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":friend}).fetchone()
     return result
+
 
