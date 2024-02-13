@@ -39,9 +39,10 @@ def search_result():
     show_button = not request.args.get("showbutton", "true") == "false"
     friend = request.args.get("search")
     error_message = None
+    if is_invalid_input(friend):
+        error_message = "Tyhjä hakukenttä ei kelpaa"
+        return render_template("search_result.html", error_message=error_message, name="", success=None, show_button=show_button)
     if queries.search(friend):
-        print(queries.search(friend)) 
-        print(friend, session['username'])
         if friend == session['username']:
             error_message = "Hae toisia käyttäjiä."
             return render_template("search_result.html", error_message=error_message, name=friend, success=None, show_button=show_button) 
