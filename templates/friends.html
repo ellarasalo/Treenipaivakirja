@@ -5,7 +5,7 @@
     {% if friends %}
         <ul>
             {% for friend in friends %}
-                <li>{{ friend }}</li>
+            <li><a href="{{ url_for('friend_workouts', friend_username=friend) }}">{{ friend }}</a></li>
             {% endfor %}
         </ul>
     {% else %}

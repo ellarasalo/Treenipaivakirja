@@ -40,6 +40,12 @@ body {
   color:#e0ddea;
 }
 
+.friendtitle {
+  color: #1fd853;
+  font-size: 30px;
+  margin: 0;
+}
+
 .title:hover {
   color: #1fd853;
 }

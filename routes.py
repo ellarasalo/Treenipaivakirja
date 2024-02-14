@@ -9,17 +9,27 @@ import sports
 def index():
     if is_login():
         workouts = queries.get_workouts(session['username'])
+        print("here")
         return render_template("frontpage.html", workouts=workouts) 
     return render_template("frontpage.html", workouts=[])
 
-@app.route("/friends")
+@app.route("/friend_workouts/<friend_username>")
+def friend_workouts(friend_username):
+    if is_login():
+        friend_workouts = queries.get_workouts(friend_username)
+        print("here2")
+        return render_template("frontpage.html", workouts=friend_workouts, friend_username=friend_username)
+    error_message = "Kirjaudu ensin sisään."
+    return render_template("error.html", error_message=error_message)
+
+@app.route("/friends", endpoint="friends")
 def friendlist():
     if is_login():
         friends = queries.get_friends(session['username'])
         return render_template("friends.html", friends=friends) 
     return render_template("friends.html", friends=[]) 
 
-@app.route("/friendrequests")
+@app.route("/friendrequests", endpoint="friendrequests")
 def new_friend_request():
     requests = queries.get_friendrequests(session['username'])
     return render_template("friendrequests.html", requests=requests) 
@@ -69,7 +79,7 @@ def search_result():
         return render_template("search_result.html",  name=friend, success=True, show_button=show_button) 
     return render_template("search_result.html",  name=friend, success=None, show_button=show_button) 
 
-@app.route("/search_friends")
+@app.route("/search_friends", endpoint="search_friends")
 def search():
     return render_template("search_friends.html") 
 
@@ -83,7 +93,7 @@ def create_sport_list(user_sports):
     return list(set(user_sports + sports.sport))
 
 
-@app.route("/add", methods=["GET", "POST"])
+@app.route("/add", methods=["GET", "POST"], endpoint="add")
 def lisaa():
     if request.method == "GET":
         user_sports = queries.get_sport(session['username'])

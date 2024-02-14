@@ -2,29 +2,27 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treenipäiväkirja</title>
 </head>
 
 <body>
-
     <div class="navbar">
         {% block navbar %}
         {% if session.username %}
-            <a href="/" class="nav-link">Tervetuloa <span>{{ session['username']}}</span></a>
-            <a href="add" class="nav-link">Lisää treeni</a>
-            <a href="statistics" class="nav-link">Omat tilastot</a>
-            <a href="friends" class="nav-link">Kaverit</a>
-            <a href="friendrequests" class="nav-link">Kaveripyynnöt</a>
-            <a href="search_friends" class="nav-link">Hae kavereita</a>
-            <a href="logout" class="nav-link">Kirjaudu ulos</a>
-    </div>
+            <a href="{{ url_for('index') }}" class="nav-link">Tervetuloa <span>{{ session['username']}}</span></a>
+            <a href="{{ url_for('add') }}" class="nav-link">Lisää treeni</a>
+            <a href="{{ url_for('statistics') }}" class="nav-link">Omat tilastot</a>
+            <a href="{{ url_for('friends') }}" class="nav-link">Kaverit</a>
+            <a href="{{ url_for('friendrequests') }}" class="nav-link">Kaveripyynnöt</a>
+            <a href="{{ url_for('search_friends') }}" class="nav-link">Hae kavereita</a>
+            <a href="{{ url_for('logout') }}" class="nav-link">Kirjaudu ulos</a>
         {% else %}
-            <a href="login" class="nav-link">Kirjaudu sisään</a>
-            <a href="register" class="nav-link">Luo käyttäjätunnus</a>
-            <a href="search_friends" class="nav-link">Hae kavereita</a>
+            <a href="{{ url_for('login') }}" class="nav-link">Kirjaudu sisään</a>
+            <a href="{{ url_for('register') }}" class="nav-link">Luo käyttäjätunnus</a>
+            <a href="{{ url_for('search_friends') }}" class="nav-link">Hae kavereita</a>
         {% endif %}
         {% endblock %}
     </div>

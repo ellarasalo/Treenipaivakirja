@@ -1,8 +1,10 @@
 
 {% extends "layout.html" %}
 {% block content %}
-
 <div id="content">
+        {% if friend_username %}
+        <p class="friendtitle">#{{ friend_username }}</p>
+        {% endif %}
     {% for workout in workouts %}
     <div class="box">
         <table class="workout_table">
