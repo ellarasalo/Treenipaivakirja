@@ -6,15 +6,12 @@
         <form action="/login" method="post" class="login-register-form">
                 <label for="username" class="miniwhiteclass">Nimimerkki</label>
             <div class="form-group">
-              
                 <input type="text" name="username" id="username">
             </div>
                 <label for="password" class="miniwhiteclass">Salasana</label>
             <div class="form-group">
-        
                 <input type="password" name="password" id="password">
             </div>
-
             {% if error_message %}
                 <p class="error-message">{{ error_message }}</p>
             {% endif %}

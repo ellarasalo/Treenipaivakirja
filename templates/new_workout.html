@@ -1,55 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
-<form action="/add" method="post" class="whiteclass">
-
-    <p>Lisää uusi treeni</p>
-
-    <p>Laji:
-        <select name="sport">
-            {% for value in sport %}
-            <option value="{{ value }}">{{ value }}</option>
-            {% endfor %}
-        </select>
-        <p name="writeTextHere">Kirjoita tähän</p>
-        <input type="text" name="usersport">
-        {% if error_message %}
-        <p class="error-message">{{ error_message }}</p>
-        {% endif %}
-    </p>
-    <p>Kesto:
-        <select name="duration">
-            {% for value in duration %}
-            <option value="{{ value }}">{{ value }}</option>
-            {% endfor %}
-        </select>
-    </p>
-    <p>Haastavuus:
-        <select name="intensity">
-            {% for value in intensity %}
-            <option value="{{ value }}">{{ value }}</option>
-            {% endfor %}
-        </select>
-    </p>
-
-    <p>Kuvaus: <input type="text" name="description"></p>
-
-    <p><input type="submit" value="Lisää treeni päiväkirjaan"></p>
-</form>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var sportSelect = document.querySelector('select[name="sport"]');
-            var usersportInput = document.querySelector('input[name="usersport"]');
-            var writeHereText = document.querySelector('p[name="writeTextHere"]');
+<div class="container">
+    <div id="content">
+        <form action="/add" method="post" class="workout-form">
+            <label for="sport" class="miniwhiteclass custom-label">Laji</label>
+            <select name="sport" id="sport" class="form-group">
+                {% for value in sport %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <p name="writeTextHere" class="form-group miniwhiteclass">Kirjoita tähän</p>
+            <input type="text" name="usersport" class="form-group">
+            {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+            <label for="duration" class="miniwhiteclass custom-label">Kesto</label>
+            <select name="duration" id="duration" class="form-group">
+                {% for value in duration %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <label for="intensity" class="miniwhiteclass custom-label">Haastavuus</label>
+            <select name="intensity" id="intensity" class="form-group">
+                {% for value in intensity %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <label for="description" class="miniwhiteclass custom-label">Kuvaus</label>
+            <div>
+                <input type="text" name="description" id="description" class="form-group">
+            </div>
             
-            usersportInput.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
-            writeHereText.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
-    
-            sportSelect.addEventListener('change', function () {
+           <!-- <label for="friend" class="miniwhiteclass custom-label">Treenasitko kaverin kanssa?</label>
+            <div>
+                <select name="friend" id="friend" class="form-group">
+                    {% for value in friends %}
+                    <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div> -->
+            <div>
+                <button type="submit" class="form-group miniwhiteclass">Lisää treeni päiväkirjaan</button> 
+            </div>
+        </form>
 
-                usersportInput.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
-                writeHereText.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var sportSelect = document.querySelector('select[name="sport"]');
+                var usersportInput = document.querySelector('input[name="usersport"]');
+                var writeHereText = document.querySelector('p[name="writeTextHere"]');
+                
+                usersportInput.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
+                writeHereText.style.display = sportSelect.value === 'muu' ? 'block' : 'none';
+        
+                sportSelect.addEventListener('change', function () {
+
+                    usersportInput.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
+                    writeHereText.style.display = (sportSelect.value === 'muu' ? 'block' : 'none');
+                });
             });
-        });
-    </script>
+        </script>
+    </div>
+</div>
 {% endblock %}

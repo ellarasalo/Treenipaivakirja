@@ -98,9 +98,11 @@ def lisaa():
     if request.method == "GET":
         user_sports = queries.get_sport(session['username'])
         user_sports_list = create_sport_list(user_sports)
+        friends = queries.get_friends(session['username'])
         return render_template("new_workout.html", sport=user_sports_list, 
-                               duration=sports.duration, intensity=sports.intensity) 
+                               duration=sports.duration, intensity=sports.intensity, friends=friends) 
     if request.method == "POST":
+        #friend = request.form["friend"]
         description = request.form["description"]
         duration = request.form["duration"]
         intensity = request.form["intensity"]
