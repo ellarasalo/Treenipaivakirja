@@ -8,12 +8,12 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
 - Käyttäjä voi valita treenin päivämäärän, lajin, keston, ja haastavuuden sekä kirjoittaa treeniin kuvauksen.
 - Käyttäjä näkee sovelluksen etusivulla omat treenit lisäysjärjestyksessä.
-- Käyttäjä voi muokata treeniä ja poistaa treenin.
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
-- Käyttäjä voi määritellä, näkyykö treenipäiväkirja ainoastaan kavereille vai kaikille käyttäjille.
+- Käyttäjä näkee statistiikkasivulla tilastoja omista treeneistä.
 - Käyttäjä voi lisätä treeniin kaverin, jolloin treeni näkyy myös kaverin päiväkirjassa.
-- Käyttäjä näkee statistiikkasivulla treenien määrän viikon, kuukauden ja vuoden aikana.
+- Käyttäjä voi määritellä, näkyykö treenipäiväkirja ainoastaan kavereille vai kaikille käyttäjille.
+- Käyttäjä voi muokata treeniä ja poistaa treenin.
 
 ## Tällä hetkellä
 
@@ -22,6 +22,7 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi valita treenin päivämäärän, lajin, keston, ja haastavuuden sekä kirjoittaa treeniin kuvauksen.
 - Käyttäjä näkee sovelluksen etusivulla omat treenit lisäysjärjestyksessä.
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
+- Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
 
 ## Ota sovellus käyttöön näin
 
