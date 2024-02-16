@@ -28,7 +28,7 @@ Sovelluksen ominaisuuksia:
 
 Kloonaa tämä repositorio ja siirry sen juurikansioon.
 
-Luo juurikansioon ```bash .env``` niminen tiedosto ja määritä sen sisältö näin:
+Luo juurikansioon ``` .env``` niminen tiedosto ja määritä sen sisältö näin:
 ```bash
 DATABASE_URL=<tietokannan-paikallinen-osoite>
 SECRET_KEY=<salainen-avain>
