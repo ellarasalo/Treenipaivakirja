@@ -7,6 +7,7 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi luoda tunnuksen ja kirjautua sisään ja ulos.
 - Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
 - Käyttäjä voi valita treenin päivämäärän, lajin, keston, ja haastavuuden sekä kirjoittaa treeniin kuvauksen.
+- Käyttäjä voi kustomoida treenivalikkoa lisäämällä muun treenin. 
 - Käyttäjä näkee sovelluksen etusivulla omat treenit lisäysjärjestyksessä.
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
@@ -20,6 +21,7 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi luoda tunnuksen ja kirjautua sisään ja ulos.
 - Käyttäjä voi lisätä uuden päiväkirjamerkinnän eli treenin.
 - Käyttäjä voi valita treenin päivämäärän, lajin, keston, ja haastavuuden sekä kirjoittaa treeniin kuvauksen.
+- Käyttäjä voi kustomoida treenivalikkoa lisäämällä muun treenin. 
 - Käyttäjä näkee sovelluksen etusivulla omat treenit lisäysjärjestyksessä.
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
