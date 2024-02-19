@@ -87,6 +87,45 @@ body {
   text-align: center;
 }
 
+
+select::-ms-expand {
+  display: none;
+}
+
+
+select {
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  padding: 8px; 
+  border: 0.1px solid #7d5e6f93; 
+  background-color: #401f307d;
+  border-radius: 6px;
+  color: #e0ddea;
+  width: 50%;
+  margin: 0 auto;
+  height: 35px;
+}
+
+
+
+select:hover {
+  cursor: pointer; 
+}
+
+
+select option:checked {
+  background-color: #2e3a43; 
+  color: #1fd853; 
+}
+
+
+select option:hover {
+  background-color: #2e3a43; 
+  color: #1fd853; 
+}
+
+
 .workout-info {
   width: 120px;
   margin-top: -7px;
@@ -216,6 +255,15 @@ input:hover {
   background-color: #217fdc;  
 }
 
+.workout_input {
+  border: 0.1px solid #7d5e6f93; 
+  background-color: #401f307d;
+}
+
+.workout_button {
+  border: 0.1px solid #7d5e6f93; 
+  background-color: #401f307d;
+}
 
 input::placeholder {
   color: #bdc3c7;  

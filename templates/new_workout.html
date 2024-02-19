@@ -10,7 +10,7 @@
                 {% endfor %}
             </select>
             <p name="writeTextHere" class="form-group miniwhiteclass">Kirjoita tähän</p>
-            <input type="text" name="usersport" class="form-group">
+            <input type="text" name="usersport" class="form-group workout_input">
             {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
             {% endif %}
@@ -28,7 +28,7 @@
             </select>
             <label for="description" class="miniwhiteclass custom-label">Kuvaus</label>
             <div>
-                <input type="text" name="description" id="description" class="form-group">
+                <input type="text" name="description" id="description" class="form-group workout_input">
             </div>
             
            <!-- <label for="friend" class="miniwhiteclass custom-label">Treenasitko kaverin kanssa?</label>
@@ -40,7 +40,7 @@
                 </select>
             </div> -->
             <div>
-                <button type="submit" class="form-group miniwhiteclass">Lisää treeni päiväkirjaan</button> 
+                <button type="submit" class="form-group miniwhiteclass workout_button">Lisää</button> 
             </div>
         </form>
 
