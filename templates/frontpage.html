@@ -5,7 +5,9 @@
     {% if login and no_workouts %}
         <p class="box miniwhiteclass"><a href="/add">Lisää ensimmäinen treeni tästä</a></p>
     {% elif not login and no_workouts %}
-    <p class="welcometext" id="kirjoitusElementti">Tervetuloa käyttämään treenipäiväkirjaa!</p>
+    <div class="welcometext-container">
+        <p class="welcometext" id="kirjoitusElementti">Tervetuloa käyttämään treenipäiväkirjaa!</p>
+    </div>
     {% endif %}
     {% if friend_username %}
         <p class="friendtitle">#{{ friend_username }}</p>

@@ -41,10 +41,17 @@ body {
 }
 
 .welcometext {
+  font-family: 'Consolas', 'Courier New', monospace;
   font-size: 25px;
   color: #1fd853;
-  font-family: 'Consolas', 'Courier New', monospace;
+ 
+  }
+
+.welcometext-container {
+    width: 540px;
+    margin: 10px 0;
 }
+
 
 .friendtitle {
   color: #1fd853;

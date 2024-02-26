@@ -1,7 +1,7 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 from sqlalchemy.sql import text
-from datetime import datetime, timedelta
+from datetime import datetime
 
 def get_user_id(username):
     sql = text("SELECT id FROM users WHERE username=:username")
