@@ -11,7 +11,7 @@ html, body {
 body {
   background: linear-gradient(to bottom,
   #000100 0%,
-  #021f24f7 100%); /* #011b20b1*/
+  #001418f7 100%); /* #011b20b1*/
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -160,7 +160,7 @@ select option:hover {
   justify-content: space-between;
   align-items: center; 
   padding: 15px 100px;
-  background-color: #011b20eb; /*#0d2220*/
+  background-color: #001418f7 /*#0d2220*/
 
 }
 
