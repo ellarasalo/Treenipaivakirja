@@ -14,7 +14,7 @@
             {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
             {% endif %}
-            <label for="duration" class="miniwhiteclass custom-label">Kesto</label>
+            <label for="duration" class="miniwhiteclass custom-label">Kesto minuutteina</label>
             <select name="duration" id="duration" class="form-group">
                 {% for value in duration %}
                 <option value="{{ value }}">{{ value }}</option>
@@ -31,17 +31,18 @@
                 <input type="text" name="description" id="description" class="form-group workout_input">
             </div>
             
-           <!-- <label for="friend" class="miniwhiteclass custom-label">Treenasitko kaverin kanssa?</label>
+           <for="friend" class="miniwhiteclass custom-label">Treenasitko kaverin kanssa?</label>
             <div>
                 <select name="friend" id="friend" class="form-group">
                     {% for value in friends %}
                     <option value="{{ value }}">{{ value }}</option>
                     {% endfor %}
                 </select>
-            </div> -->
+            </div>
             <div>
                 <button type="submit" class="form-group miniwhiteclass workout_button">Lisää</button> 
             </div>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
 
         <script>

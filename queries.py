@@ -127,9 +127,19 @@ def add_workout(username, description, sport, duration, intensity):
                                       "sport": sport, 
                                       "duration": duration, 
                                       "intensity": intensity}).fetchone()
-    thread_id = result[0]
+    workout_id = result[0]
     sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
-    db.session.execute(sql, {"user_id":user_id, "workout_id":thread_id})
+    db.session.execute(sql, {"user_id":user_id, "workout_id":workout_id})
+    db.session.commit()
+    return workout_id
+
+def add_user_to_workout(username, workout_id):
+    sql = text("SELECT id FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username":username}).fetchone()
+    user_id = result[0]
+
+    sql = text("INSERT INTO user_workouts (user_id, workout_id) VALUES (:user_id, :workout_id)")
+    db.session.execute(sql, {"user_id":user_id, "workout_id":workout_id})
     db.session.commit()
 
 def get_workouts(username):
@@ -144,6 +154,23 @@ def get_workouts(username):
     result = db.session.execute(sql, {"username": username}).fetchall()
     workouts = [row for row in result]
     return workouts
+
+def get_workout_friends(username):
+    user_id = get_user_id(username)
+    sql = text("""
+        SELECT DISTINCT uw.workout_id, uw.user_id
+        FROM user_workouts uw
+        WHERE uw.workout_id IN (
+            SELECT workout_id
+            FROM user_workouts
+            WHERE user_id = :user_id
+        )
+        AND uw.user_id != :user_id
+    """)
+    result = db.session.execute(sql, {"user_id": user_id}).fetchall()
+    print(result[0])
+
+
 
 def get_statistics(username):
     end_date = datetime.now()
@@ -161,6 +188,8 @@ def get_statistics(username):
     
     statistics = [row[0].strftime("%d.%m.%Y") for row in result]
     return statistics
+
+
 
 def search(friend):
     sql = text("SELECT id FROM users WHERE username=:username")

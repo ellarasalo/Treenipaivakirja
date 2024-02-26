@@ -1,23 +1,33 @@
 from app import app
-from flask import render_template, request, redirect, session, make_response, Flask, flash
+from flask import render_template, request, redirect, session, make_response, Flask, flash, abort
 from app import db
 from sqlalchemy.sql import text
 import queries
 import sports
+import secrets
+
+def csrf_token():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
 
 @app.route("/")
 def index():
+    no_workouts = True
     if is_login():
+        login = True
         workouts = queries.get_workouts(session['username'])
-        print("here")
-        return render_template("frontpage.html", workouts=workouts) 
-    return render_template("frontpage.html", workouts=[])
+        print(workouts)
+        if workouts != []:
+            no_workouts = False
+            friend = queries.get_workout_friends(session['username'])
+        return render_template("frontpage.html", workouts=workouts, no_workouts=no_workouts, login=login)
+    login = False
+    return render_template("frontpage.html", workouts=[], no_workouts=no_workouts, login=login)
 
 @app.route("/friend_workouts/<friend_username>")
 def friend_workouts(friend_username):
     if is_login():
         friend_workouts = queries.get_workouts(friend_username)
-        print("here2")
         return render_template("frontpage.html", workouts=friend_workouts, friend_username=friend_username)
     error_message = "Kirjaudu ensin sisään."
     return render_template("error.html", error_message=error_message)
@@ -102,7 +112,8 @@ def lisaa():
         return render_template("new_workout.html", sport=user_sports_list, 
                                duration=sports.duration, intensity=sports.intensity, friends=friends) 
     if request.method == "POST":
-        #friend = request.form["friend"]
+        csrf_token()
+        friend = request.form["friend"]
         description = request.form["description"]
         duration = request.form["duration"]
         intensity = request.form["intensity"]
@@ -115,7 +126,9 @@ def lisaa():
             if is_invalid_input(sport):
                 return empty_choice(session['username'])
         if is_login():
-            queries.add_workout(session['username'], description, sport, duration, intensity)
+            workout_id = queries.add_workout(session['username'], description, sport, duration, intensity)
+            if friend:
+                queries.add_user_to_workout(friend, workout_id)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
     # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
 
@@ -137,7 +150,8 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if queries.login(password, username): 
-            session['username'] = username 
+            session['username'] = username
+            session["csrf_token"] = secrets.token_hex(16) 
         else:
             error_message = "Väärä käyttäjätunnus tai salasana"
             return render_template("login.html", error_message=error_message)
@@ -166,6 +180,7 @@ def register():
             try:
                 queries.register(password2, username)
                 session['username'] = username
+                session["csrf_token"] = secrets.token_hex(16)
                 return redirect("/")
             except Exception as e:
                 error_message = f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi."

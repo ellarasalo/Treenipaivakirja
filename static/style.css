@@ -66,14 +66,14 @@ body {
 }
 
 .box {
-  width: 520px; 
+  width: 540px; 
   background-color: #d93c8e52; /*#4b5b5d85;#294447  #68395193 #83144e52*/
   padding: 20px;
   padding-bottom: 40px;
   margin: 10px 0;
   color: #e0ddea;
   border-radius: 9px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   border: 0.1px solid #7d5e6f93;
   
 }
@@ -209,7 +209,8 @@ select option:hover {
   align-items: flex-start; 
   height: 80vh; 
   width: 80%; 
-  margin: 15px; 
+  margin: 15px;
+  margin-bottom: 100px;
 }
 
 .login-register-form {
