@@ -3,9 +3,9 @@
 {% block content %}
 <div id="content">
     {% if login and no_workouts %}
-        <p class="box whiteclass">Aloita lisäämällä uusi treeni</p>
+        <p class="box miniwhiteclass"><a href="/add">Lisää ensimmäinen treeni tästä</a></p>
     {% elif not login and no_workouts %}
-        <p class="box whiteclass">Aloita luomalla käyttäjätili</p>
+    <p class="welcometext" id="kirjoitusElementti">Tervetuloa käyttämään treenipäiväkirjaa!</p>
     {% endif %}
     {% if friend_username %}
         <p class="friendtitle">#{{ friend_username }}</p>
@@ -17,6 +17,7 @@
                 <td class="workout-info miniwhiteclass">{{ workout.sport}}</td>
                 <td class="workout-info miniwhiteclass">{{ workout.duration }} min</td>
                 <td class="workout-info miniwhiteclass">{{ workout.intensity }}</td>
+                <td class="workout-info miniwhiteclass">{{ workout.friend }}</td>
                 <td class="timestamp miniwhiteclass">{{ workout.timestamp.strftime('%d.%m.%Y') }}</td>
             </tr>
         </table>
@@ -31,6 +32,28 @@
     </div> 
     {% endfor %}
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tekstiElementti = document.getElementById('kirjoitusElementti');
+
+        if (tekstiElementti) {
+            var alkuperainenTeksti = tekstiElementti.textContent;
+            tekstiElementti.textContent = '';
+
+            var kirjoitaIndeksi = 0;
+            var kirjoitusVäli = 70;
+
+            var kirjoitusIntervalli = setInterval(function () {
+                tekstiElementti.textContent += alkuperainenTeksti[kirjoitaIndeksi];
+                kirjoitaIndeksi++;
+
+                if (kirjoitaIndeksi === alkuperainenTeksti.length) {
+                    clearInterval(kirjoitusIntervalli);
+                }
+            }, kirjoitusVäli);
+        }
+    });
+</script>
 
 
 {% endblock %}

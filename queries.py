@@ -158,17 +158,19 @@ def get_workouts(username):
 def get_workout_friends(username):
     user_id = get_user_id(username)
     sql = text("""
-        SELECT DISTINCT uw.workout_id, uw.user_id
-        FROM user_workouts uw
+        SELECT DISTINCT uw.workout_id, u.username
+        FROM user_workouts uw, users u
         WHERE uw.workout_id IN (
             SELECT workout_id
             FROM user_workouts
             WHERE user_id = :user_id
         )
         AND uw.user_id != :user_id
+        AND uw.user_id = u.id
     """)
     result = db.session.execute(sql, {"user_id": user_id}).fetchall()
-    print(result[0])
+    return result
+
 
 
 

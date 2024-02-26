@@ -10,6 +10,28 @@ def csrf_token():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
+def get_friend(friends, id):
+    print(friends)
+    if not friends: return ""
+    for friend in friends:
+        if friend[0] == id:
+            return friend[1]
+    return ""
+
+def create_workouts(workouts, friends):
+    result = []
+    for workout in workouts:
+        d = {}
+        #print(get_friend(friends, workout.id), friends)
+        d['friend'] = get_friend(friends, workout.id)
+        d['intensity'] = workout.intensity
+        d['duration'] = workout.duration
+        d['sport'] = workout.sport
+        d['description'] = workout.description
+        d['timestamp'] = workout.timestamp
+        result.append(d)
+    return result
+
 @app.route("/")
 def index():
     no_workouts = True
@@ -20,6 +42,7 @@ def index():
         if workouts != []:
             no_workouts = False
             friend = queries.get_workout_friends(session['username'])
+            workouts = create_workouts(workouts, friend)
         return render_template("frontpage.html", workouts=workouts, no_workouts=no_workouts, login=login)
     login = False
     return render_template("frontpage.html", workouts=[], no_workouts=no_workouts, login=login)
@@ -109,11 +132,15 @@ def lisaa():
         user_sports = queries.get_sport(session['username'])
         user_sports_list = create_sport_list(user_sports)
         friends = queries.get_friends(session['username'])
+        friends = ['-'] + friends
         return render_template("new_workout.html", sport=user_sports_list, 
                                duration=sports.duration, intensity=sports.intensity, friends=friends) 
     if request.method == "POST":
+        print("here")
         csrf_token()
+        print("here")
         friend = request.form["friend"]
+        print("tässä", friend)
         description = request.form["description"]
         duration = request.form["duration"]
         intensity = request.form["intensity"]
@@ -127,7 +154,7 @@ def lisaa():
                 return empty_choice(session['username'])
         if is_login():
             workout_id = queries.add_workout(session['username'], description, sport, duration, intensity)
-            if friend:
+            if friend != '-':
                 queries.add_user_to_workout(friend, workout_id)
         return redirect("/") # lähettää uudelleenohjauspyynnön selaimelle osoitteeseen joka on parametrina.
     # kun selain saa pyynnön se lähettää get pyynnön osoitteeseen 
