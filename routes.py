@@ -38,7 +38,6 @@ def index():
     if is_login():
         login = True
         workouts = queries.get_workouts(session['username'])
-        print(workouts)
         if workouts != []:
             no_workouts = False
             friend = queries.get_workout_friends(session['username'])
@@ -51,6 +50,9 @@ def index():
 def friend_workouts(friend_username):
     if is_login():
         friend_workouts = queries.get_workouts(friend_username)
+        if friend_workouts != []:
+            friend = queries.get_workout_friends(friend_username)
+            friend_workouts = create_workouts(friend_workouts, friend)
         return render_template("frontpage.html", workouts=friend_workouts, friend_username=friend_username)
     error_message = "Kirjaudu ensin sisään."
     return render_template("error.html", error_message=error_message)
