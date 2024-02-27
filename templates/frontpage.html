@@ -6,7 +6,10 @@
         <p class="box miniwhiteclass"><a href="/add">Lisää ensimmäinen treeni tästä</a></p>
     {% elif not login and no_workouts %}
     <div class="welcometext-container">
-        <p class="welcometext" id="kirjoitusElementti">Tervetuloa käyttämään treenipäiväkirjaa!</p>
+        <p class="welcometext" id="writingElement"></p>
+        <a href="{{ url_for('register') }}" class="frontp-register" id="registerLink" 
+        style="display:none;">Aloita luomalla käyttäjätili</a>
+        <a href="{{ url_for('login') }}" class="nav-link" id="loginLink" style="display:none;">Kirjaudu sisään</a>
     </div>
     {% endif %}
     {% if friend_username %}
@@ -36,14 +39,14 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var tekstiElementti = document.getElementById('kirjoitusElementti');
+        var tekstiElementti = document.getElementById('writingElement');
+        var loginLink = document.getElementById('loginLink');
+        var registerLink = document.getElementById('registerLink');
 
-        if (tekstiElementti) {
-            var alkuperainenTeksti = tekstiElementti.textContent;
-            tekstiElementti.textContent = '';
-
+        if (tekstiElementti && loginLink && registerLink) {
+            var alkuperainenTeksti = "Tervetuloa käyttämään treenipäiväkirjaa!";
             var kirjoitaIndeksi = 0;
-            var kirjoitusVäli = 70;
+            var kirjoitusVäli = 55;
 
             var kirjoitusIntervalli = setInterval(function () {
                 tekstiElementti.textContent += alkuperainenTeksti[kirjoitaIndeksi];
@@ -51,6 +54,8 @@
 
                 if (kirjoitaIndeksi === alkuperainenTeksti.length) {
                     clearInterval(kirjoitusIntervalli);
+                    loginLink.style.display = "inline";  
+                    registerLink.style.display = "inline";  
                 }
             }, kirjoitusVäli);
         }

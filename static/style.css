@@ -48,10 +48,9 @@ body {
   }
 
 .welcometext-container {
-    width: 540px;
-    margin: 10px 0;
+  width: 540px;
+  margin: 10px 0;
 }
-
 
 .friendtitle {
   color: #1fd853;
@@ -195,6 +194,22 @@ select option:hover {
 }
 
 .nav-link:hover {
+  color: #1fd853;
+}
+
+.frontp-register {
+  border: 1px solid #e0ddea;
+  border-radius: 6px;
+  padding: 10px; 
+  margin-right: 10px;
+  text-decoration: none;
+  color: #e0ddea;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.frontp-register:hover {
   color: #1fd853;
 }
 
