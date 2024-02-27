@@ -14,8 +14,6 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä näkee kaverin treenipäiväkirjan.
 - Käyttäjä näkee statistiikkasivulla tilastoja omista treeneistä.
 - Käyttäjä voi lisätä treeniin kaverin, jolloin treeni näkyy myös kaverin päiväkirjassa.
-- Käyttäjä voi määritellä, näkyykö treenipäiväkirja ainoastaan kavereille vai kaikille käyttäjille.
-- Käyttäjä voi muokata treeniä ja poistaa treenin.
 
 ## Tällä hetkellä
 
@@ -27,6 +25,7 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
 - Käyttäjä näkee kaverin treenipäiväkirjan.
+- Käyttäjä voi lisätä treeniin kaverin, jolloin treeni näkyy myös kaverin päiväkirjassa.
 
 ## Ota sovellus käyttöön näin
 
