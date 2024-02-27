@@ -41,14 +41,14 @@ body {
 }
 
 .welcometext {
-  font-family: 'Consolas', 'Courier New', monospace;
+  font-family: 'Consolas', monospace;
   font-size: 25px;
   color: #1fd853;
  
   }
 
 .welcometext-container {
-  width: 540px;
+  width: 590px;
   margin: 10px 0;
 }
 

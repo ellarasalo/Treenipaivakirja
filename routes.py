@@ -22,7 +22,6 @@ def create_workouts(workouts, friends):
     result = []
     for workout in workouts:
         d = {}
-        #print(get_friend(friends, workout.id), friends)
         d['friend'] = get_friend(friends, workout.id)
         d['intensity'] = workout.intensity
         d['duration'] = workout.duration
