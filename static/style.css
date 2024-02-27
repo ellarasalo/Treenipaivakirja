@@ -40,6 +40,11 @@ body {
   color:#e0ddea;
 }
 
+.friend-list {
+  list-style-type: none;
+  text-align: center;
+}
+
 .welcometext {
   font-family: 'Consolas', monospace;
   font-size: 25px;
