@@ -34,7 +34,7 @@ body {
 }
 
 .title {
-  font-size: 40px;
+  font-size: 45px;
   margin-bottom: 0px;
   text-decoration: none;
   color:#e0ddea;
@@ -43,6 +43,10 @@ body {
 .friend-list {
   list-style-type: none;
   text-align: center;
+}
+
+.friend-list:hover {
+  color: #1fd853;
 }
 
 .welcometext {
@@ -55,6 +59,26 @@ body {
 .welcometext-container {
   width: 590px;
   margin: 10px 0;
+}
+
+.friendbox a {
+  width: 300px;
+  margin: 10px 0;
+  font-size: 30px;
+  color: #e0ddea;
+  text-decoration: none;
+}
+
+.friendbox {
+  width: 300px;
+  margin: 10px 0;
+  font-size: 30px;
+  color: #e0ddea;
+  text-decoration: none;
+}
+
+.friendbox a:hover {
+  color: #1fd853;
 }
 
 .friendtitle {
@@ -76,7 +100,7 @@ body {
 
 .miniwhiteclass {
   color: #e0ddea;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 10px;
   text-decoration: none;
   font-weight: 300;

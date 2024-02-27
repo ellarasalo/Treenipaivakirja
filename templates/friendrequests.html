@@ -1,16 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="whiteclass">
-    <p>Kaveripyynnöt</p>
+<div class="miniwhiteclass">
+    {% if requests %}
+    <a class="frontp-register miniwhiteclass" href="/search_friends">Lähetä kaveripyyntöjä</a>
+    <p>Hyväksy tai hylkää kaveripyyntöjä</p>
     {% for sender in requests %}
-        <div class="box">{{ sender }}</div> 
-        <form action="/acceptfriendrequest/{{ sender }}" method="post" class="whiteclass">
-            <button type="submit" class="miniwhiteclass">Hyväksy</button>
-        </form>
-        <form action="/declinefriendrequest/{{ sender }}" method="post" class="whiteclass">
-            <button type="submit" class="miniwhiteclass">Hylkää</button>
-        </form>
+        <div class="friendbox">
+            {{ sender }}
+            <form action="/acceptfriendrequest/{{ sender }}" method="post" class="whiteclass">
+                <button type="submit" class="miniwhiteclass">Hyväksy</button>
+            </form>
+            <form action="/declinefriendrequest/{{ sender }}" method="post" class="whiteclass">
+                <button type="submit" class="miniwhiteclass">Hylkää</button>
+            </form>
+        </div>
     {% endfor %}
+    {% else %}
+    <div class="miniwhiteclass">
+        <p><a class="frontp-register" href="/search_friends">Lähetä kaveripyyntöjä</a>Ei kaveripyyntöjä</p>
+    </div>
+    {% endif %}
 </div>
-
 {% endblock %}

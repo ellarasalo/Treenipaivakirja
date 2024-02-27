@@ -16,14 +16,20 @@
             <a href="{{ url_for('add') }}" class="nav-link">Lisää treeni</a>
             <a href="{{ url_for('statistics') }}" class="nav-link">Omat tilastot</a>
             <a href="{{ url_for('friends') }}" class="nav-link">Kaverit</a>
-            <a href="{{ url_for('friendrequests') }}" class="nav-link">Kaveripyynnöt</a>
+            <a href="{{ url_for('friendrequests') }}" class="nav-link">Kaveripyynnöt</a> 
             <a href="{{ url_for('search_friends') }}" class="nav-link">Hae kavereita</a>
             <a href="{{ url_for('logout') }}" class="nav-link">Kirjaudu ulos</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="nav-link">Kirjaudu sisään</a>
+            <a href="{{ url_for('register') }}" class="nav-link">Luo käyttäjätili</a>
         {% endif %}
         {% endblock %}
     </div>
     <div id="header">
         <a href="/" class="title">Treenipäiväkirja</a>
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
     </div>
     <div>{% with messages = get_flashed_messages() %}
         {% if messages %} 
@@ -35,10 +41,6 @@
         {% endif %}
         {% endwith %}
     </div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-
 </body>
 
 </html>

@@ -1,16 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="miniwhiteclass">
+<div>
     {% if friends %}
-    <p><a class="frontp-register" href="/search_friends">Etsi kavereita</a>Vieraile kaverin treenipäiväkirjassa!</p>
-        <ul class="friend-list">
-            <p>Kaverit</p>
+    <div class="welcometext">
+        <p>Vieraile kaverin treenipäiväkirjassa!</p>
+    </div>
             {% for friend in friends %}
-            <li><a href="{{ url_for('friend_workouts', friend_username=friend) }}">{{ friend }}</a></li>
+            <div class="friendbox">
+                <a href="{{ url_for('friend_workouts', friend_username=friend) }}">{{ friend }}</a>
+            </div>
             {% endfor %}
-        </ul>
     {% else %}
-        <p><a class="frontp-register" href="/search_friends">Etsi kavereita</a>Sinulla ei ole vielä kavereita</p>
+        <p><a class="frontp-register" href="/search_friends">Hae kavereita</a>Sinulla ei ole vielä kavereita</p>
     {% endif %}
 
 </div>
