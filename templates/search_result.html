@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-<form action="/search" method="get" class="whiteclass">
-    Hae kavereita &#x1F60E; <input type="text" name="search">
-    <p><input type="submit" value="Hae tästä"></p>
+<form action="/search" method="get" class="miniwhiteclass">
+  <div class="miniwhiteclass">
+    Etsi kavereita &#x1F60E; <input type="text" name="search">
+    <p><input type="submit" value="Hae"></p>
+  </div>
 </form>
 
 {% if success %}
   {% if show_button %}
-    <div class="whiteclass"> {{ name }} löytyi</div>
+    <div class="miniwhiteclass"> {{ name }} löytyi</div>
     <form action="/new_friendrequest?name={{ name }}" method="post">
         <button type="submit">Lähetä kaveripyyntö</button>
     </form>
@@ -15,6 +17,6 @@
 {% elif error_message %}
   <p class="error-message">{{ error_message }}</p>
 {% else %}
-  <div class="whiteclass"> Käyttäjää {{ name }} ei löytynyt</div>
+  <div class="miniwhiteclass"> Käyttäjää {{ name }} ei löytynyt</div>
 {% endif %}
 {% endblock %}
