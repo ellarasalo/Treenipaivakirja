@@ -34,7 +34,7 @@ body {
 }
 
 .title {
-  font-size: 45px;
+  font-size: 40px;
   margin-bottom: 0px;
   text-decoration: none;
   color:#e0ddea;
@@ -59,6 +59,7 @@ body {
 .welcometext-container {
   width: 590px;
   margin: 10px 0;
+  margin-left: 60px;
 }
 
 .friendbox a {
@@ -117,7 +118,7 @@ body {
 
 .box {
   width: 540px; 
-  background-color: #d93c8e52; /*#4b5b5d85;#294447  #68395193 #83144e52*/
+  background-color: #d93c8e0d; /*#d93c8e52    #4b5b5d85;#294447  #68395193 #83144e52*/
   padding: 20px;
   padding-bottom: 40px;
   margin: 10px 0;
@@ -129,12 +130,13 @@ body {
 }
 
 .workout-form {
-  background-color: #d93c8e52;
+  background-color: #d93c8e0d;
   padding: 50px;  
   border-radius: 8px; 
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
   border: 0.1px solid #7d5e6f93;
   text-align: center;
+  margin-bottom: 150px;
 }
 
 
@@ -149,7 +151,7 @@ select {
   -moz-appearance: none; 
   padding: 8px; 
   border: 0.1px solid #7d5e6f93; 
-  background-color: #401f307d;
+  background-color: #16080f4a;
   border-radius: 6px;
   color: #e0ddea;
   width: 50%;
@@ -276,7 +278,6 @@ select option:hover {
   height: 80vh; 
   width: 80%; 
   margin: 15px;
-  margin-bottom: 100px;
 }
 
 .login-register-form {
@@ -324,7 +325,7 @@ input:hover {
 
 .workout_input {
   border: 0.1px solid #7d5e6f93; 
-  background-color: #401f307d;
+  background-color: #16080f4a;
 }
 
 .workout_button {

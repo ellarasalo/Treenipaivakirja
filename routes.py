@@ -60,7 +60,7 @@ def friend_workouts(friend_username):
 def friendlist():
     if is_login():
         friends = queries.get_friends(session['username'])
-        friends = reversed(friends)
+        friends = list(reversed(friends))
         return render_template("friends.html", friends=friends) 
     return render_template("friends.html", friends=[]) 
 
