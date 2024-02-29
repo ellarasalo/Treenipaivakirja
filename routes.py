@@ -183,7 +183,9 @@ def login():
             session["csrf_token"] = secrets.token_hex(16) 
         else:
             error_message = "Väärä käyttäjätunnus tai salasana"
-            return render_template("login.html", error_message=error_message)
+            return render_template("login.html", error_message=error_message,
+                                   inputusername=username,
+                                   inputpassword=password)
         return redirect("/")
     
 def is_invalid_input(input_text): 
@@ -213,7 +215,10 @@ def register():
                 return redirect("/")
             except Exception as e:
                 error_message = f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi."
-        return render_template("register.html", error_message=error_message)
+        return render_template("register.html", error_message=error_message,
+                                inputusername=username,
+                                inputpassword1=password1,
+                                inputpassword2=password2)
 
 @app.route("/logout")
 def logout():
