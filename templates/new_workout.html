@@ -10,7 +10,7 @@
                 {% endfor %}
             </select>
             <p name="writeTextHere" class="form-group miniwhiteclass">Kirjoita tähän</p>
-            <input type="text" name="usersport" class="form-group workout_input">
+            <input type="text" name="usersport"  maxlength="30" class="form-group user_sport_input">
             {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
             {% endif %}

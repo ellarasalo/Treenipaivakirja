@@ -132,7 +132,6 @@ def statistics():
 def create_sport_list(user_sports):
     return list(set(user_sports + sports.sport))
 
-
 @app.route("/add", methods=["GET", "POST"], endpoint="add")
 def lisaa():
     if request.method == "GET":
@@ -153,6 +152,8 @@ def lisaa():
             sport = request.form["usersport"]
             if is_invalid_input(sport):
                 return empty_choice(session['username'])
+            if len(sport) > 30:
+                return usersport_too_long(session['username'])
         else:
             sport = request.form["sport"]
             if is_invalid_input(sport):
@@ -166,6 +167,15 @@ def lisaa():
 
 def empty_choice(username):
     error_message = "Valitse laji valikosta tai kirjoita muu laji valitsemalla 'muu'"
+    user_sports = queries.get_sport(username)
+    user_sports_list = create_sport_list(user_sports)
+    return render_template("/new_workout.html", sport=user_sports_list,
+                                                duration=sports.duration,
+                                                intensity=sports.intensity,
+                                                error_message=error_message)
+
+def usersport_too_long(username):
+    error_message = "Laji saa olla enintään 30 merkkiä pitkä"
     user_sports = queries.get_sport(username)
     user_sports_list = create_sport_list(user_sports)
     return render_template("/new_workout.html", sport=user_sports_list,
@@ -201,10 +211,14 @@ def registererrors(username, password1, password2):
     result = []
     if is_invalid_input(username):
         result.append("Tyhjä nimimerkki ei kelpaa")
+    elif len(username) > 30:
+        result.append("Nimimerkki saa olla enintään 30 merkkiä pitkä")
     elif queries.get_user_id(username):
         result.append(f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi.")
     if is_invalid_input(password1) and is_invalid_input(password2):
         result.append("Tyhjä salasana ei kelpaa")
+    elif len(password1) > 100 or len(password2) > 100:
+        result.append("Salasana saa olla enintään 100 merkkiä pitkä")
     elif is_invalid_input(password1) or is_invalid_input(password2):
         result.append("Täytä salasana molempiin kenttiin")
     elif password1 != password2:

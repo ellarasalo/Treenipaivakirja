@@ -6,11 +6,11 @@
         <form action="/login" method="post" class="login-register-form">
                 <label for="username" class="miniwhiteclass">Nimimerkki</label>
             <div class="form-group">
-                <input type="text" name="username" id="username" value="{{ inputusername }}">
+                <input type="text" name="username" id="username" maxlength="30" value="{{ inputusername }}">
             </div>
                 <label for="password" class="miniwhiteclass">Salasana</label>
             <div class="form-group">
-                <input type="password" name="password" id="password" value="{{ inputpassword }}">
+                <input type="password" name="password" id="password" maxlength="100" value="{{ inputpassword }}">
             </div>
             {% if error_message %}
             {% for error in error_message %}

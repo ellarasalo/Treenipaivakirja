@@ -5,15 +5,15 @@
         <form action="/register" method="post" class="login-register-form">
             <label class="miniwhiteclass">Nimimerkki</label>
             <div class="form-group">
-                <input type="text" name="username" value="{{ inputusername }}">
+                <input type="text" name="username" maxlength="30" value="{{ inputusername }}">
             </div>
             <label class="miniwhiteclass">Salasana</label>
             <div class="form-group">
-                <input type="password" name="password1" value="{{ inputpassword1 }}">
+                <input type="password" name="password1" maxlength="100" value="{{ inputpassword1 }}">
             </div>
             <label class="miniwhiteclass">Salasana uudestaan</label>
             <div class="form-group">
-                <input type="password" name="password2" value="{{ inputpassword2 }}">
+                <input type="password" name="password2" maxlength="100" value="{{ inputpassword2 }}">
             </div>
             
             {% if error_message %}
