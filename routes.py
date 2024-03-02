@@ -133,7 +133,7 @@ def create_sport_list(user_sports):
     return list(set(user_sports + sports.sport))
 
 @app.route("/add", methods=["GET", "POST"], endpoint="add")
-def lisaa():
+def add_new_workout():
     if request.method == "GET":
         user_sports = queries.get_sport(session['username'])
         user_sports_list = create_sport_list(user_sports)
@@ -151,13 +151,11 @@ def lisaa():
         if request.form["sport"] == 'muu':
             sport = request.form["usersport"]
             if is_invalid_input(sport):
-                return empty_choice(session['username'])
+                error_message = "Valitse laji valikosta tai kirjoita muu laji valitsemalla 'muu'"
             if len(sport) > 30:
-                return usersport_too_long(session['username'])
-        else:
-            sport = request.form["sport"]
-            if is_invalid_input(sport):
-                return empty_choice(session['username'])
+                error_message = "Laji saa olla enintään 30 merkkiä pitkä"
+            return usersport_error(session['username'], error_message)
+        sport = request.form["sport"]
         if is_login():
             workout_id = queries.add_workout(session['username'], description,
                                              sport, duration, intensity)
@@ -165,17 +163,7 @@ def lisaa():
                 queries.add_user_to_workout(friend, workout_id)
         return redirect("/")
 
-def empty_choice(username):
-    error_message = "Valitse laji valikosta tai kirjoita muu laji valitsemalla 'muu'"
-    user_sports = queries.get_sport(username)
-    user_sports_list = create_sport_list(user_sports)
-    return render_template("/new_workout.html", sport=user_sports_list,
-                                                duration=sports.duration,
-                                                intensity=sports.intensity,
-                                                error_message=error_message)
-
-def usersport_too_long(username):
-    error_message = "Laji saa olla enintään 30 merkkiä pitkä"
+def usersport_error(username, error_message):
     user_sports = queries.get_sport(username)
     user_sports_list = create_sport_list(user_sports)
     return render_template("/new_workout.html", sport=user_sports_list,
