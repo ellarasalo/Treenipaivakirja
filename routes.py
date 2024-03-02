@@ -148,6 +148,9 @@ def add_new_workout():
         description = request.form["description"]
         duration = request.form["duration"]
         intensity = request.form["intensity"]
+        if len(description) > 500:
+            error_message = "Kuvaus saa olla enintään 500 merkkiä pitkä"
+            return usersport_error(session['username'], error_message)
         if request.form["sport"] == 'muu':
             sport = request.form["usersport"]
             if is_invalid_input(sport):
