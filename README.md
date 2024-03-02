@@ -12,8 +12,8 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi hakea sovelluksesta toisen käyttäjän profiilia hakutoiminnolla.
 - Käyttäjä voi lisätä toisen käyttäjän kaveriksi.
 - Käyttäjä näkee kaverin treenipäiväkirjan.
-- Käyttäjä näkee statistiikkasivulla tilastoja omista treeneistä.
 - Käyttäjä voi lisätä treeniin kaverin, jolloin treeni näkyy myös kaverin päiväkirjassa.
+- Käyttäjä näkee statistiikkasivulla tilaston omista treeneistä.
 
 ## Ota sovellus käyttöön näin
 
