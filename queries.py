@@ -1,7 +1,7 @@
-from werkzeug.security import check_password_hash, generate_password_hash
-from app import db
-from sqlalchemy.sql import text
 from datetime import datetime
+from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy.sql import text
+from app import db
 
 def get_user_id(username):
     sql = text("SELECT id FROM users WHERE username=:username")
@@ -25,10 +25,10 @@ def get_friends(username):
 def friendrequest_accepted(sender, username):
     sender_id = get_user_id(sender)
     user_id = get_user_id(username)
-    sql1 = text("""INSERT INTO friends (user_id1, user_id2) 
+    sql1 = text("""INSERT INTO friends (user_id1, user_id2)
                 VALUES (:sender_id, :user_id)""")
     db.session.execute(sql1, {"sender_id": sender_id, "user_id": user_id})
-    sql2 = text("""DELETE FROM friend_requests 
+    sql2 = text("""DELETE FROM friend_requests
                 WHERE sender_id = :sender_id AND receiver_id = :user_id""")
     db.session.execute(sql2, {"sender_id": sender_id, "user_id": user_id})
     db.session.commit()
@@ -36,7 +36,7 @@ def friendrequest_accepted(sender, username):
 def friendrequest_declined(sender, username):
     sender_id = get_user_id(sender)
     user_id = get_user_id(username)
-    sql = text("""DELETE FROM friend_requests 
+    sql = text("""DELETE FROM friend_requests
                 WHERE sender_id = :sender_id AND receiver_id = :user_id""")
     db.session.execute(sql, {"sender_id": sender_id, "user_id": user_id})
     db.session.commit()
@@ -44,31 +44,31 @@ def friendrequest_declined(sender, username):
 def is_friend(username1, username2):
     user_id1 = get_user_id(username1)
     user_id2 = get_user_id(username2)
-    
     sql = text("""
         SELECT * FROM friends
         WHERE (user_id1 = :user_id1 AND user_id2 = :user_id2)
         OR (user_id1 = :user_id2 AND user_id2 = :user_id1)
     """)
     result = db.session.execute(sql, {"user_id1": user_id1, "user_id2": user_id2}).fetchone()
-
     return result is not None
-
 
 def is_friend_request_sent(sender_username, receiver_username):
     sender_id = get_user_id(sender_username)
     receiver_id = get_user_id(receiver_username)
 
-    sql = text("SELECT * FROM friend_requests WHERE sender_id = :sender_id AND receiver_id = :receiver_id")
-    result = db.session.execute(sql, {"sender_id": sender_id, "receiver_id": receiver_id}).fetchone()
+    sql = text("""SELECT * FROM friend_requests
+               WHERE sender_id = :sender_id 
+               AND receiver_id = :receiver_id""")
+    result = db.session.execute(sql, {"sender_id": sender_id,
+                                      "receiver_id": receiver_id}).fetchone()
 
     return result is not None
 
 def send_friendrequest(username, friend):
     sender_id = get_user_id(username)
     receiver_id = get_user_id(friend)
-
-    sql = text("INSERT INTO friend_requests (sender_id, receiver_id) VALUES (:sender_id, :receiver_id)")
+    sql = text("""INSERT INTO friend_requests (sender_id, receiver_id)
+               VALUES (:sender_id, :receiver_id)""")
     db.session.execute(sql, {"sender_id": sender_id, "receiver_id": receiver_id})
     db.session.commit()
 
@@ -90,22 +90,22 @@ def register(password, username):
     sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")
     db.session.execute(sql, {"username":username, "password":hash_value})
     db.session.commit()
-    
+
 def loginerrors(password, user, username):
     result = []
     if is_invalid_input(username):
-            result.append("Tyhjä käyttäjätunnus ei kelpaa")
+        result.append("Tyhjä käyttäjätunnus ei kelpaa")
     elif not user:
         result.append("Väärä käyttäjätunnus")
     if is_invalid_input(password):
-            result.append("Tyhjä salasana ei kelpaa")
+        result.append("Tyhjä salasana ei kelpaa")
     if user and not is_invalid_input(password):
         hash_value = user.password
         if not check_password_hash(hash_value, password):
             result.append("Väärä salasana")
     return result
 
-def is_invalid_input(input_text): 
+def is_invalid_input(input_text):
     return not input_text.strip()
 
 def login(password, username):
@@ -113,7 +113,7 @@ def login(password, username):
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     return loginerrors(password, user, username)
-   
+
 
 def get_sport(username):
     sql = text("""
@@ -131,10 +131,10 @@ def add_workout(username, description, sport, duration, intensity):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username}).fetchone()
     user_id = result[0]
-    sql = text("""INSERT INTO workouts (description, timestamp, sport, duration, intensity) 
+    sql = text("""INSERT INTO workouts (description, timestamp, sport, duration, intensity)
                VALUES (:description, CURRENT_TIMESTAMP, :sport, :duration, :intensity) 
                RETURNING id""")
-    result = db.session.execute(sql, {"description":description, 
+    result = db.session.execute(sql, {"description":description,
                                       "sport": sport, 
                                       "duration": duration, 
                                       "intensity": intensity}).fetchone()
@@ -163,8 +163,7 @@ def get_workouts(username):
         ORDER BY w.timestamp DESC
     """)
     result = db.session.execute(sql, {"username": username}).fetchall()
-    workouts = [row for row in result]
-    return workouts
+    return result
 
 def get_workout_friends(username):
     user_id = get_user_id(username)
@@ -182,9 +181,6 @@ def get_workout_friends(username):
     result = db.session.execute(sql, {"user_id": user_id}).fetchall()
     return result
 
-
-
-
 def get_statistics(username):
     end_date = datetime.now()
     start_date = datetime(end_date.year, end_date.month, 1)
@@ -198,15 +194,11 @@ def get_statistics(username):
     """)
     para = {"username": username, "start_date": start_date, "end_date": end_date}
     result = db.session.execute(sql, para).fetchall()
-    
+
     statistics = [row[0].strftime("%d.%m.%Y") for row in result]
     return statistics
-
-
 
 def search(friend):
     sql = text("SELECT id FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":friend}).fetchone()
     return result
-
-
