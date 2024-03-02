@@ -152,10 +152,12 @@ def add_new_workout():
             sport = request.form["usersport"]
             if is_invalid_input(sport):
                 error_message = "Valitse laji valikosta tai kirjoita muu laji valitsemalla 'muu'"
+                return usersport_error(session['username'], error_message)
             if len(sport) > 30:
                 error_message = "Laji saa olla enintään 30 merkkiä pitkä"
-            return usersport_error(session['username'], error_message)
-        sport = request.form["sport"]
+                return usersport_error(session['username'], error_message)
+        else:
+            sport = request.form["sport"]
         if is_login():
             workout_id = queries.add_workout(session['username'], description,
                                              sport, duration, intensity)
