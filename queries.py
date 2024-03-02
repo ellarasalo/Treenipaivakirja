@@ -91,18 +91,29 @@ def register(password, username):
     db.session.execute(sql, {"username":username, "password":hash_value})
     db.session.commit()
     
+def loginerrors(password, user, username):
+    result = []
+    if is_invalid_input(username):
+            result.append("Tyhjä käyttäjätunnus ei kelpaa")
+    elif not user:
+        result.append("Väärä käyttäjätunnus")
+    if is_invalid_input(password):
+            result.append("Tyhjä salasana ei kelpaa")
+    if user and not is_invalid_input(password):
+        hash_value = user.password
+        if not check_password_hash(hash_value, password):
+            result.append("Väärä salasana")
+    return result
+
+def is_invalid_input(input_text): 
+    return not input_text.strip()
+
 def login(password, username):
     sql = text("SELECT id, password FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
-    user = result.fetchone()    
-    if not user:
-        return False
-    else:
-        hash_value = user.password
-        if check_password_hash(hash_value, password):
-            return True
-        else:
-            return False
+    user = result.fetchone()
+    return loginerrors(password, user, username)
+   
 
 def get_sport(username):
     sql = text("""

@@ -48,13 +48,14 @@ def index():
 @app.route("/friend_workouts/<friend_username>")
 def friend_workouts(friend_username):
     if is_login():
-        friend_workouts = queries.get_workouts(friend_username)
-        if friend_workouts != []:
-            friend = queries.get_workout_friends(friend_username)
-            friend_workouts = create_workouts(friend_workouts, friend)
-        return render_template("frontpage.html", workouts=friend_workouts, friend_username=friend_username)
-    error_message = "Kirjaudu ensin sisään."
-    return render_template("error.html", error_message=error_message)
+        if friend_username in queries.get_friends(session['username']):
+            friend_workouts = queries.get_workouts(friend_username)
+            if friend_workouts != []:
+                friend = queries.get_workout_friends(friend_username)
+                friend_workouts = create_workouts(friend_workouts, friend)
+            return render_template("frontpage.html", workouts=friend_workouts, friend_username=friend_username)
+    flash("Kirjaudu ensin sisään!")
+    return render_template("frontpage.html", workouts=[], friend_username=friend_username)
 
 @app.route("/friends", endpoint="friends")
 def friendlist():
@@ -178,17 +179,17 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if queries.login(password, username): 
+        error_message = queries.login(password, username)
+        if error_message == []:
             session['username'] = username
             session["csrf_token"] = secrets.token_hex(16) 
         else:
-            error_message = "Väärä käyttäjätunnus tai salasana"
             return render_template("login.html", error_message=error_message,
                                    inputusername=username,
                                    inputpassword=password)
         return redirect("/")
     
-def is_invalid_input(input_text): 
+def is_invalid_input(input_text):
     return not input_text.strip()
 
 def is_login():
