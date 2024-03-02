@@ -84,4 +84,3 @@ def get_statistics(username):
     result = db.session.execute(sql, para).fetchall()
     statistics = [row[0].strftime("%d.%m.%Y") for row in result]
     return statistics
-

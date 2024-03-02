@@ -28,4 +28,3 @@ def loginerrors(password, user, username):
         if not check_password_hash(hash_value, password):
             result.append("Väärä salasana")
     return result
-
