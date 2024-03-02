@@ -130,6 +130,10 @@ body {
   
 }
 
+.chart {
+  margin: 70px;
+}
+
 .workout-form {
   background-color: #d93c8e0d;
   padding: 50px;  

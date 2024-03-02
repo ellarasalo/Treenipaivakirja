@@ -182,8 +182,8 @@ def get_workout_friends(username):
     return result
 
 def get_statistics(username):
+    start_date = datetime(datetime.now().year, 1, 1)
     end_date = datetime.now()
-    start_date = datetime(end_date.year, end_date.month, 1)
     sql = text("""
         SELECT w.timestamp
         FROM workouts w
@@ -194,7 +194,6 @@ def get_statistics(username):
     """)
     para = {"username": username, "start_date": start_date, "end_date": end_date}
     result = db.session.execute(sql, para).fetchall()
-
     statistics = [row[0].strftime("%d.%m.%Y") for row in result]
     return statistics
 

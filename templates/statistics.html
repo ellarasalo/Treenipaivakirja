@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="whiteclass">
-    <p>statistiikkaa</p>
+<div class="miniwhiteclass chart">
     <canvas id="dateChart" width="400" height="400"></canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/moment"></script>
@@ -15,29 +14,42 @@
         let parts = dateStr.split('.');
         return new Date(parts[2], parts[1] - 1, parts[0]).toISOString();
     });
+    
     let ctx = document.getElementById('dateChart').getContext('2d');
 
-    Chart.defaults.global.plugins.datalabels = {
-        formatter: function(value, context) {
-            return moment(value).format('DD.MM.YYYY');
+    let weekData = {};
+    dates.forEach(date => {
+        let isoDate = new Date(date).toISOString();
+        let weekNumber = moment(isoDate).isoWeek();
+        if (!weekData[weekNumber]) {
+            weekData[weekNumber] = 0;
         }
-    };
+        weekData[weekNumber]++;
+    });
 
     let chart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: dates,
+            labels: Object.keys(weekData),
             datasets: [{
-                label: 'Päivät',
-                data: dates.map((date, index) => ({x: date, y: index})),
+                label: 'Viikot',
+                data: Object.values(weekData),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
             }]
         },
         options: {
             scales: {
                 xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'day',
+                    type: 'category',
+                    labels: Object.keys(weekData),
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 14,
+                        fontColor: 'white'
                     }
                 }]
             },
@@ -49,8 +61,5 @@
         }
     });
 </script>
-
-
-
 
 {% endblock %}
