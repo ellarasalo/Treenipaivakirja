@@ -1,15 +1,16 @@
-from flask import render_template, request, redirect, session, flash, abort
+from flask import render_template, request, redirect, session, flash
 from app import app
-import queries
+import workout_queries
+import friend_queries
 import sports
 import routes
 
 @app.route("/add", methods=["GET", "POST"], endpoint="add")
 def add_new_workout():
     if request.method == "GET":
-        user_sports = queries.get_sport(session['username'])
+        user_sports = workout_queries.get_sport(session['username'])
         user_sports_list = create_sport_list(user_sports)
-        friends = queries.get_friends(session['username'])
+        friends = friend_queries.get_friends(session['username'])
         friends = ['-'] + friends
         return render_template("new_workout.html", sport=user_sports_list,
                                duration=sports.duration, intensity=sports.intensity,
@@ -34,14 +35,14 @@ def add_new_workout():
         else:
             sport = request.form["sport"]
         if routes.is_login():
-            workout_id = queries.add_workout(session['username'], description,
+            workout_id = workout_queries.add_workout(session['username'], description,
                                              sport, duration, intensity)
             if friend != '-':
-                queries.add_user_to_workout(friend, workout_id)
+                workout_queries.add_user_to_workout(friend, workout_id)
         return redirect("/")
 
 def usersport_error(username, error_message):
-    user_sports = queries.get_sport(username)
+    user_sports = workout_queries.get_sport(username)
     user_sports_list = create_sport_list(user_sports)
     return render_template("/new_workout.html", sport=user_sports_list,
                                                 duration=sports.duration,
@@ -54,10 +55,10 @@ def create_sport_list(user_sports):
 @app.route("/friend_workouts/<friend_username>")
 def friend_workouts(friend_username):
     if routes.is_login():
-        if friend_username in queries.get_friends(session['username']):
-            friend_workouts_list = queries.get_workouts(friend_username)
+        if friend_username in friend_queries.get_friends(session['username']):
+            friend_workouts_list = workout_queries.get_workouts(friend_username)
             if friend_workouts_list != []:
-                friend = queries.get_workout_friends(friend_username)
+                friend = workout_queries.get_workout_friends(friend_username)
                 friend_workouts_list = create_workouts(friend_workouts_list, friend)
             return render_template("frontpage.html", workouts=friend_workouts_list,
                                                         friend_username=friend_username)
@@ -90,10 +91,10 @@ def index():
     no_workouts = True
     if routes.is_login():
         login = True
-        workouts = queries.get_workouts(session['username'])
+        workouts = workout_queries.get_workouts(session['username'])
         if workouts != []:
             no_workouts = False
-            friend = queries.get_workout_friends(session['username'])
+            friend = workout_queries.get_workout_friends(session['username'])
             workouts = create_workouts(workouts, friend)
         return render_template("frontpage.html",
                                workouts=workouts,
@@ -104,5 +105,5 @@ def index():
 
 @app.route("/statistics")
 def statistics():
-    workouts = queries.get_statistics(session["username"])
+    workouts = workout_queries.get_statistics(session["username"])
     return render_template("statistics.html", dates=workouts)

@@ -1,7 +1,8 @@
 import secrets
-from flask import render_template, request, redirect, session, flash, abort
+from flask import render_template, request, redirect, session, abort
 from app import app
 import queries
+import friend_queries
 
 def csrf_token():
     if session["csrf_token"] != request.form["csrf_token"]:
@@ -56,7 +57,7 @@ def registererrors(username, password1, password2):
         result.append("Tyhjä nimimerkki ei kelpaa")
     elif len(username) > 30:
         result.append("Nimimerkki saa olla enintään 30 merkkiä pitkä")
-    elif queries.get_user_id(username):
+    elif friend_queries.get_user_id(username):
         result.append(f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi.")
     if is_invalid_input(password1) and is_invalid_input(password2):
         result.append("Tyhjä salasana ei kelpaa")
