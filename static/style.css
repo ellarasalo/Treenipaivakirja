@@ -105,6 +105,7 @@ body {
   margin-bottom: 10px;
   text-decoration: none;
   font-weight: 300;
+  letter-spacing: 0.4px;
 }
 
 .miniwhiteclass a {
@@ -222,6 +223,7 @@ select option:hover {
   font-size: 15px;
   cursor: pointer;
   font-weight: 300;
+  letter-spacing: 0.4px;
 }
 
 .nav-link:hover {
@@ -238,6 +240,7 @@ select option:hover {
   font-size: 15px;
   cursor: pointer;
   font-weight: 300;
+  letter-spacing: 0.4px;
 }
 
 .frontp-register:hover {
@@ -251,6 +254,7 @@ select option:hover {
   font-size: 12px;
   cursor: pointer;
   font-weight: 300;
+  letter-spacing: 0.4px;
 }
 
 
@@ -326,6 +330,9 @@ input:hover {
 .workout_input {
   border: 0.1px solid #7d5e6f93; 
   background-color: #16080f4a;
+  max-height: 200px;
+  max-width: 500px;
+  overflow-y: auto;
 }
 
 .workout_button {
