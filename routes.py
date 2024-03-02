@@ -195,31 +195,38 @@ def is_invalid_input(input_text):
 def is_login():
     return session.get('username')
 
+def registererrors(username, password1, password2):
+    result = []
+    if is_invalid_input(username):
+        result.append("Tyhjä nimimerkki ei kelpaa")
+    elif queries.get_user_id(username):
+        result.append(f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi.")
+    if is_invalid_input(password1) and is_invalid_input(password2):
+        result.append("Tyhjä salasana ei kelpaa")
+    elif is_invalid_input(password1) or is_invalid_input(password2):
+        result.append("Täytä salasana molempiin kenttiin")
+    elif password1 != password2:
+        result.append("Salasanat eroavat")
+    return result
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    error_message = None
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        if password1 != password2:
-            error_message = "Salasanat eroavat"
-        elif is_invalid_input(username) or is_invalid_input(password1):
-            error_message = "Tyhjä nimimerkki tai salasana ei kelpaa"
-        else:
-            try:
-                queries.register(password2, username)
-                session['username'] = username
-                session["csrf_token"] = secrets.token_hex(16)
-                return redirect("/")
-            except Exception as e:
-                error_message = f"Käyttäjänimi '{username}' on jo käytössä. Valitse toinen käyttäjänimi."
-        return render_template("register.html", error_message=error_message,
-                                inputusername=username,
-                                inputpassword1=password1,
-                                inputpassword2=password2)
+        errors = registererrors(username, password1, password2)
+        if errors:
+            return render_template("register.html", error_message=errors,
+                                                    inputusername=username,
+                                                    inputpassword1=password1,
+                                                    inputpassword2=password2)
+    queries.register(password2, username)
+    session['username'] = username
+    session["csrf_token"] = secrets.token_hex(16)
+    return redirect("/")
 
 @app.route("/logout")
 def logout():

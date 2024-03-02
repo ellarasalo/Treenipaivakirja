@@ -17,7 +17,9 @@
             </div>
             
             {% if error_message %}
-                <p class="error-message">{{ error_message }}</p>
+            {% for error in error_message %}
+                <p class="error-message">{{ error }}</p>
+            {% endfor %}    
             {% endif %}
 
             <button type="submit" class="miniwhiteclass">Luo tili</button>
