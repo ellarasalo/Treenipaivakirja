@@ -10,20 +10,25 @@
 
 <body>
     <div class="navbar">
-        {% block navbar %}
-        {% if session.username %}
-            <a href="{{ url_for('index') }}" class="nav-link">Tervetuloa <span>{{ session['username']}}</span></a>
-            <a href="{{ url_for('add') }}" class="nav-link">Lisää treeni</a>
-            <a href="{{ url_for('statistics') }}" class="nav-link">Omat tilastot</a>
-            <a href="{{ url_for('friends') }}" class="nav-link">Kaverit</a>
-            <a href="{{ url_for('friendrequests') }}" class="nav-link">Kaveripyynnöt</a> 
-            <a href="{{ url_for('search_friends') }}" class="nav-link">Hae kavereita</a>
-            <a href="{{ url_for('logout') }}" class="nav-link">Kirjaudu ulos</a>
-        {% else %}
-            <a href="{{ url_for('login') }}" class="nav-link">Kirjaudu sisään</a>
-            <a href="{{ url_for('register') }}" class="nav-link">Luo käyttäjätili</a>
-        {% endif %}
-        {% endblock %}
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
+        </div>
+        <div class="navbar-links" id="navbar-links">
+            {% block navbar %}
+            {% if session.username %}
+                <a href="{{ url_for('index') }}" class="nav-link">Tervetuloa <span>{{ session['username']}}</span></a>
+                <a href="{{ url_for('add') }}" class="nav-link">Lisää treeni</a>
+                <a href="{{ url_for('statistics') }}" class="nav-link">Omat tilastot</a>
+                <a href="{{ url_for('friends') }}" class="nav-link">Kaverit</a>
+                <a href="{{ url_for('friendrequests') }}" class="nav-link">Kaveripyynnöt</a> 
+                <a href="{{ url_for('search_friends') }}" class="nav-link">Hae kavereita</a>
+                <a href="{{ url_for('logout') }}" class="nav-link">Kirjaudu ulos</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="nav-link">Kirjaudu sisään</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Luo käyttäjätili</a>
+            {% endif %}
+            {% endblock %}
+        </div>
     </div>
     <div id="header">
         <a href="/" class="title">Treenipäiväkirja</a>
@@ -41,6 +46,16 @@
         {% endif %}
         {% endwith %}
     </div>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            var navbarLinks = document.getElementById('navbar-links');
+            if (navbarLinks.style.display === 'block') {
+                navbarLinks.style.display = 'none';
+            } else {
+                navbarLinks.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 
 </html>
