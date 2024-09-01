@@ -1,5 +1,7 @@
 # Treenipäiväkirja
 
+# 🚀 <https://treeniapp.fly.dev/>
+
 Sovellusta käytetään treenipäiväkirjana.
 
 Sovelluksen ominaisuuksia:
